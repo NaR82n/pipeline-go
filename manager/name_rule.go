@@ -37,6 +37,15 @@ func _apmSName(pt *point.Point) string {
 	return ""
 }
 
+func _eventSName(pt *point.Point) string {
+	if source := pt.Get("df_source"); source != nil {
+		if cat, ok := source.(string); ok {
+			return cat
+		}
+	}
+	return ""
+}
+
 func _defaultCatSName(pt *point.Point) string {
 	return pt.Name()
 }
@@ -56,6 +65,8 @@ func ScriptName(relation *ScriptRelation, cat point.Category, pt *point.Point, s
 		scriptName = _securitySName(pt)
 	case point.Tracing, point.Profiling:
 		scriptName = _apmSName(pt)
+	case point.KeyEvent:
+		scriptName = _eventSName(pt)
 	default:
 		scriptName = _defaultCatSName(pt)
 	}
