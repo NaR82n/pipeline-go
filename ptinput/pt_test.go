@@ -246,7 +246,7 @@ func BenchmarkPts(b *testing.B) {
 
 func ptMockOperatorAdd(pti PlInputPt) {
 	for i := 0; i < 5; i++ {
-		pti.Get("_")
+		_, _, _ = pti.Get("_")
 	}
 
 	n := "xyz_"
@@ -258,7 +258,7 @@ func ptMockOperatorAdd(pti PlInputPt) {
 
 func ptMockOperatorDrop(pti PlInputPt) {
 	for i := 0; i < 5; i++ {
-		pti.Get("_")
+		_, _, _ = pti.Get("_")
 	}
 
 	pti.MarkDrop(true)
@@ -266,7 +266,7 @@ func ptMockOperatorDrop(pti PlInputPt) {
 
 func ptMockOperatorDel(pti PlInputPt) {
 	for i := 0; i < 5; i++ {
-		pti.Get("_")
+		_, _, _ = pti.Get("_")
 	}
 
 	n := "xyz_"

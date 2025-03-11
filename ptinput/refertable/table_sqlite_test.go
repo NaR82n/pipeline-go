@@ -147,7 +147,7 @@ func TestPlReferTablesSqlite_query(t *testing.T) {
 	}
 	r := p.db.QueryRow("select sqlite_version()")
 	var ver string
-	r.Scan(&ver)
+	_ = r.Scan(&ver)
 	t.Logf("sqlite version: %s", ver)
 	if _, err := p.db.Exec("CREATE TABLE test(id INTEGER, name TEXT, age INTEGER, alive NUMERIC, grade REAL)"); err != nil {
 		t.Fatal(err)

@@ -70,13 +70,13 @@ func TestWkr(t *testing.T) {
 			go func() {
 				time.Sleep(time.Millisecond * 20)
 				for _, pts := range ptsLi {
-					wkr.Send(point.Logging, pts)
+					_ = wkr.Send(point.Logging, pts)
 				}
 				time.Sleep(time.Millisecond * 50)
 				wkr.Stop()
 			}()
 
-			wkr.Customer(ctx, point.Logging)
+			_ = wkr.Customer(ctx, point.Logging)
 
 			total := 0
 			for _, v := range v.n {

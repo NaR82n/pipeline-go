@@ -15,10 +15,10 @@ func TestNewCache(t *testing.T) {
 
 func TestCache_SetAndGet(t *testing.T) {
 	cache, _ := NewCache(time.Second, 10)
-	cache.Set("key1", "value1", 10*time.Second)
-	cache.Set("key2", "value2", 10*time.Second)
-	cache.Set("key3", "value3", 10*time.Second)
-	cache.Set("key4", "value4", 10*time.Second)
+	_ = cache.Set("key1", "value1", 10*time.Second)
+	_ = cache.Set("key2", "value2", 10*time.Second)
+	_ = cache.Set("key3", "value3", 10*time.Second)
+	_ = cache.Set("key4", "value4", 10*time.Second)
 
 	time.Sleep(2 * time.Second)
 
@@ -33,7 +33,7 @@ func TestCache_SetAndGet(t *testing.T) {
 
 func TestCache_RemoveExpiredCache(t *testing.T) {
 	cache, _ := NewCache(time.Second, 10)
-	cache.Set("key", "value", 5*time.Second)
+	_ = cache.Set("key", "value", 5*time.Second)
 
 	time.Sleep(2 * time.Second)
 	_, exist1, _ := cache.Get("key")
@@ -62,14 +62,14 @@ func TestCache(t *testing.T) {
 	var wg sync.WaitGroup
 	fnSet := func() {
 		for i := 0; i < times; i++ {
-			cache.Set("k", "v", time.Millisecond*10)
+			_ = cache.Set("k", "v", time.Millisecond*10)
 		}
 		wg.Done()
 	}
 
 	fnGet := func() {
 		for i := 0; i < times; i++ {
-			cache.Get("k1")
+			_, _, _ = cache.Get("k1")
 		}
 		wg.Done()
 	}

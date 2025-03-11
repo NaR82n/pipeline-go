@@ -119,7 +119,7 @@ func newJSONDataServer(files map[string]string) *httptest.Server {
 			}
 			name := r.FormValue("name")
 			data := files[name]
-			w.Write([]byte(data))
+			_, _ = w.Write([]byte(data))
 			w.WriteHeader(http.StatusOK)
 		},
 	))

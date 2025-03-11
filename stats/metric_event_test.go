@@ -111,7 +111,7 @@ func TestMetric(t *testing.T) {
 		select {
 		case c := <-c:
 			m := dto.Metric{}
-			c.Write(&m)
+			_ = c.Write(&m)
 			assert.Equal(t, len(lb)+2, len(m.Label))
 			mp := map[string]struct{}{}
 			for _, v := range m.Label {
@@ -122,7 +122,7 @@ func TestMetric(t *testing.T) {
 				mpExp[v] = struct{}{}
 			}
 
-			mpExp["ns"] = struct{}{}
+			mpExp["namespace"] = struct{}{}
 			mpExp["category"] = struct{}{}
 
 			assert.Equal(t, mpExp, mp)

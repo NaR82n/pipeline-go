@@ -307,7 +307,7 @@ func HTTPServer() *httptest.Server {
 				}
 			}
 
-			w.Write(respData)
+			_, _ = w.Write(respData)
 			w.WriteHeader(http.StatusOK)
 		},
 	))
