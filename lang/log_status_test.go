@@ -1,15 +1,11 @@
-// Unless explicitly stated otherwise all files in this repository are licensed
-// under the MIT License.
-// This product includes software developed at Guance Cloud (https://www.guance.com/).
-// Copyright 2021-present Guance, Inc.
-
-package manager
+package lang
 
 import (
 	"testing"
 	"time"
 
 	"github.com/GuanceCloud/cliutils/point"
+	"github.com/GuanceCloud/pipeline-go/constants"
 	"github.com/GuanceCloud/pipeline-go/ptinput"
 	"github.com/stretchr/testify/assert"
 )
@@ -55,32 +51,32 @@ func TestStatus(t *testing.T) {
 	for k, v := range statusMap {
 		outp := &pt4t{
 			Fields: map[string]interface{}{
-				FieldStatus: k,
+				constants.FieldStatus: k,
 			},
 		}
 		pt := ptinput.NewPlPt(point.Logging, "", nil, outp.Fields, time.Now())
 		ProcLoggingStatus(pt, false, nil)
-		assert.Equal(t, v, pt.Fields()[FieldStatus])
+		assert.Equal(t, v, pt.Fields()[constants.FieldStatus])
 	}
 
 	{
 		outp := &pt4t{
 			Fields: map[string]interface{}{
-				FieldStatus:  "x",
-				FieldMessage: "1234567891011",
+				constants.FieldStatus:  "x",
+				constants.FieldMessage: "1234567891011",
 			},
 		}
 		pt := ptinput.NewPlPt(point.Logging, "", nil, outp.Fields, time.Now())
 		ProcLoggingStatus(pt, false, nil)
-		assert.Equal(t, "x", pt.Fields()[FieldStatus])
-		assert.Equal(t, "1234567891011", pt.Fields()[FieldMessage])
+		assert.Equal(t, "x", pt.Fields()[constants.FieldStatus])
+		assert.Equal(t, "1234567891011", pt.Fields()[constants.FieldMessage])
 	}
 
 	{
 		outp := &pt4t{
 			Fields: map[string]interface{}{
-				FieldStatus:  "x",
-				FieldMessage: "1234567891011",
+				constants.FieldStatus:  "x",
+				constants.FieldMessage: "1234567891011",
 			},
 			Tags: map[string]string{
 				"xxxqqqddd": "1234567891011",
@@ -89,8 +85,8 @@ func TestStatus(t *testing.T) {
 		pt := ptinput.NewPlPt(point.Logging, "", outp.Tags, outp.Fields, time.Now())
 		ProcLoggingStatus(pt, false, nil)
 		assert.Equal(t, map[string]interface{}{
-			FieldStatus:  "x",
-			FieldMessage: "1234567891011",
+			constants.FieldStatus:  "x",
+			constants.FieldMessage: "1234567891011",
 		}, pt.Fields())
 		assert.Equal(t, map[string]string{
 			"xxxqqqddd": "1234567891011",
@@ -100,8 +96,8 @@ func TestStatus(t *testing.T) {
 	{
 		outp := &pt4t{
 			Fields: map[string]interface{}{
-				FieldStatus:  "n",
-				FieldMessage: "1234567891011",
+				constants.FieldStatus:  "n",
+				constants.FieldMessage: "1234567891011",
 			},
 			Tags: map[string]string{
 				"xxxqqqddd": "1234567891011",
@@ -110,8 +106,8 @@ func TestStatus(t *testing.T) {
 		pt := ptinput.NewPlPt(point.Logging, "", outp.Tags, outp.Fields, time.Now())
 		ProcLoggingStatus(pt, false, nil)
 		assert.Equal(t, map[string]interface{}{
-			FieldStatus:  "notice",
-			FieldMessage: "1234567891011",
+			constants.FieldStatus:  "notice",
+			constants.FieldMessage: "1234567891011",
 		}, pt.Fields())
 		assert.Equal(t, map[string]string{
 			"xxxqqqddd": "1234567891011",
