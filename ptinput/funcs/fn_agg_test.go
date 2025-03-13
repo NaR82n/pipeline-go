@@ -93,7 +93,7 @@ func TestAgg(t *testing.T) {
 				return nil
 			}
 
-			buks := plmap.NewAggBuks(fn, nil)
+			buks := plmap.NewAggBkt(fn, nil)
 			for _, tcIn := range tc.in {
 				pt := ptinput.NewPlPt(
 					point.Logging, "test", nil, map[string]any{"message": tcIn}, time.Now())

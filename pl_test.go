@@ -9,6 +9,8 @@ import (
 	"testing"
 
 	"github.com/GuanceCloud/cliutils/point"
+	"github.com/GuanceCloud/pipeline-go/lang"
+	"github.com/GuanceCloud/pipeline-go/lang/platypus"
 	"github.com/GuanceCloud/pipeline-go/ptinput/funcs"
 	"github.com/GuanceCloud/platypus/pkg/engine"
 	"github.com/influxdata/influxdb1-client/models"
@@ -288,7 +290,10 @@ func BenchmarkScript(b *testing.B) {
 		})...)
 		pt := point.NewPointV2("test", kvs, point.DefaultLoggingOptions()...)
 
-		s, _ := manager.NewScripts(map[string]string{"s": sGrok2}, nil, "", point.Logging)
+		s, _ := platypus.NewScripts(
+			map[string]string{"s": sGrok2},
+			lang.WithCat(point.Logging),
+		)
 
 		sp := s["s"]
 		if sp == nil {
@@ -296,9 +301,10 @@ func BenchmarkScript(b *testing.B) {
 		}
 		for i := 0; i < b.N; i++ {
 			p := ptinput.WrapPoint(point.Logging, pt)
-			if err := sp.Run(p, nil, &manager.Option{}); err != nil {
+			if err := sp.Run(p, nil, &lang.LogOption{}); err != nil {
 				b.Fatal(err)
 			}
 		}
+		sp.Cleanup()
 	})
 }

@@ -14,6 +14,8 @@ import (
 	"time"
 
 	"github.com/GuanceCloud/cliutils/point"
+	"github.com/GuanceCloud/pipeline-go/constants"
+	"github.com/GuanceCloud/pipeline-go/lang/platypus"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,11 +36,11 @@ func TestScriptLoadFunc(t *testing.T) {
 		},
 	}
 
-	m.LoadScripts(NSDefault, nil, nil)
-	m.LoadScripts(NSGitRepo, nil, nil)
-	m.LoadScripts(NSRemote, nil, nil)
+	m.LoadScripts(constants.NSDefault, nil, nil)
+	m.LoadScripts(constants.NSGitRepo, nil, nil)
+	m.LoadScripts(constants.NSRemote, nil, nil)
 
-	m.LoadScripts(NSDefault, case1, nil)
+	m.LoadScripts(constants.NSDefault, case1, nil)
 	for category, v := range case1 {
 		for name := range v {
 			if y, ok := m.QueryScript(category, name); !ok {
@@ -50,11 +52,11 @@ func TestScriptLoadFunc(t *testing.T) {
 		}
 	}
 
-	m.LoadScripts(NSDefault, nil, nil)
-	m.LoadScripts(NSGitRepo, nil, nil)
-	m.LoadScripts(NSRemote, nil, nil)
+	m.LoadScripts(constants.NSDefault, nil, nil)
+	m.LoadScripts(constants.NSGitRepo, nil, nil)
+	m.LoadScripts(constants.NSRemote, nil, nil)
 	for k, v := range case1 {
-		m.LoadScriptWithCat(k, NSDefault, v, nil)
+		m.LoadScriptWithCat(k, constants.NSDefault, v, nil)
 	}
 	for category, v := range case1 {
 		for name := range v {
@@ -64,9 +66,9 @@ func TestScriptLoadFunc(t *testing.T) {
 		}
 	}
 
-	m.LoadScripts(NSDefault, nil, nil)
-	m.LoadScripts(NSGitRepo, nil, nil)
-	m.LoadScripts(NSRemote, nil, nil)
+	m.LoadScripts(constants.NSDefault, nil, nil)
+	m.LoadScripts(constants.NSGitRepo, nil, nil)
+	m.LoadScripts(constants.NSRemote, nil, nil)
 	for category, v := range case1 {
 		for name := range v {
 			if _, ok := m.QueryScript(category, name); ok {
@@ -75,25 +77,25 @@ func TestScriptLoadFunc(t *testing.T) {
 		}
 	}
 
-	m.LoadScripts(NSDefault, nil, nil)
-	m.LoadScripts(NSGitRepo, nil, nil)
-	m.LoadScripts(NSRemote, nil, nil)
+	m.LoadScripts(constants.NSDefault, nil, nil)
+	m.LoadScripts(constants.NSGitRepo, nil, nil)
+	m.LoadScripts(constants.NSRemote, nil, nil)
 
 	for k, v := range case1 {
 		m.LoadScriptWithCat(k, "DefaultScriptNS", v, nil)
-		whichStore(m, k).UpdateScriptsWithNS(NSRemote, v, nil)
+		whichStore(m, k).UpdateScriptsWithNS(constants.NSRemote, v, nil)
 	}
 	for category, v := range case1 {
 		for name := range v {
-			if s, ok := m.QueryScript(category, name); !ok || s.NS() != NSRemote {
+			if s, ok := m.QueryScript(category, name); !ok || s.NS() != constants.NSRemote {
 				t.Error(category, " ", name)
 			}
 		}
 	}
 
-	m.LoadScripts(NSDefault, nil, nil)
-	m.LoadScripts(NSGitRepo, nil, nil)
-	m.LoadScripts(NSRemote, nil, nil)
+	m.LoadScripts(constants.NSDefault, nil, nil)
+	m.LoadScripts(constants.NSGitRepo, nil, nil)
+	m.LoadScripts(constants.NSRemote, nil, nil)
 
 	_ = os.WriteFile("/tmp/nginx-time123.p", []byte(`
 		json(_, time)
@@ -102,7 +104,7 @@ func TestScriptLoadFunc(t *testing.T) {
 		`), os.FileMode(0o755))
 	ss, _ := ReadScripts("/tmp")
 	whichStore(m, point.Logging).UpdateScriptsWithNS(
-		NSDefault, ss, nil)
+		constants.NSDefault, ss, nil)
 	_ = os.Remove("/tmp/nginx-time123.p")
 }
 
@@ -131,19 +133,19 @@ func BenchmarkIndexMap(b *testing.B) {
 		}
 
 		m := cachemap{}
-		m.m.Store("abc.p", &PlScript{})
-		m.m.Store("def.p", &PlScript{})
+		m.m.Store("abc.p", &platypus.PlScript{})
+		m.m.Store("def.p", &platypus.PlScript{})
 
-		var x1, x2, x3 *PlScript
+		var x1, x2, x3 *platypus.PlScript
 		for i := 0; i < b.N; i++ {
 			if v, ok := m.m.Load("abc.p"); ok {
-				x1 = v.(*PlScript)
+				x1 = v.(*platypus.PlScript)
 			}
 			if v, ok := m.m.Load("def.p"); ok {
-				x2 = v.(*PlScript)
+				x2 = v.(*platypus.PlScript)
 			}
 			if v, ok := m.m.Load("ddd"); ok {
-				x3 = v.(*PlScript)
+				x3 = v.(*platypus.PlScript)
 			}
 		}
 		b.Log(x1, x2, x3, false)
@@ -151,18 +153,18 @@ func BenchmarkIndexMap(b *testing.B) {
 
 	b.Run("map", func(b *testing.B) {
 		type cachemap struct {
-			m     map[string]*PlScript
+			m     map[string]*platypus.PlScript
 			mlock sync.RWMutex
 		}
 
 		m := cachemap{
-			m: map[string]*PlScript{
+			m: map[string]*platypus.PlScript{
 				"abc.p": {},
 				"def.p": {},
 			},
 		}
 
-		var x1, x2, x3 *PlScript
+		var x1, x2, x3 *platypus.PlScript
 		var ok bool
 		for i := 0; i < b.N; i++ {
 			m.mlock.RLock()
@@ -195,35 +197,35 @@ func TestPlScriptStore(t *testing.T) {
 
 	store.indexUpdate(nil)
 
-	err := store.UpdateScriptsWithNS(NSDefault, map[string]string{
+	err := store.UpdateScriptsWithNS(constants.NSDefault, map[string]string{
 		"abc.p": "default_time(time) ;set_tag(a, \"1\")",
 	}, nil)
 	if err != nil {
 		t.Error(err)
 	}
 
-	err = store.UpdateScriptsWithNS(NSDefault, map[string]string{
+	err = store.UpdateScriptsWithNS(constants.NSDefault, map[string]string{
 		"abc.p": "default_time(time)",
 	}, nil)
 	if err != nil {
 		t.Error(err)
 	}
 
-	err = store.UpdateScriptsWithNS(NSDefault, map[string]string{
+	err = store.UpdateScriptsWithNS(constants.NSDefault, map[string]string{
 		"abc.p": "default_time(time); set_tag(a, 1)",
 	}, nil)
 	if err == nil {
 		t.Error("should not be nil")
 	}
 
-	err = store.UpdateScriptsWithNS(NSDefault, map[string]string{
+	err = store.UpdateScriptsWithNS(constants.NSDefault, map[string]string{
 		"abc.p": "default_time(time)",
 	}, nil)
 	if err != nil {
 		t.Error(err)
 	}
 
-	err = store.UpdateScriptsWithNS(NSGitRepo, map[string]string{
+	err = store.UpdateScriptsWithNS(constants.NSGitRepo, map[string]string{
 		"abc.p": "default_time(time)",
 	}, nil)
 	if err != nil {
@@ -232,14 +234,14 @@ func TestPlScriptStore(t *testing.T) {
 
 	assert.Equal(t, store.Count(), 2)
 
-	err = store.UpdateScriptsWithNS(NSConfd, map[string]string{
+	err = store.UpdateScriptsWithNS(constants.NSConfd, map[string]string{
 		"abc.p": "default_time(time)",
 	}, nil)
 	if err != nil {
 		t.Error(err)
 	}
 
-	err = store.UpdateScriptsWithNS(NSRemote, map[string]string{
+	err = store.UpdateScriptsWithNS(constants.NSRemote, map[string]string{
 		"abc.p": "default_time(time)",
 	}, nil)
 	if err != nil {
@@ -254,8 +256,8 @@ func TestPlScriptStore(t *testing.T) {
 				t.Error(fmt.Errorf("!ok"))
 				return
 			}
-			if sInfo.ns != nsSearchOrder[i+1] {
-				t.Error(sInfo.ns, nsSearchOrder[i+1])
+			if sInfo.NS() != nsSearchOrder[i+1] {
+				t.Error(sInfo.NS(), nsSearchOrder[i+1])
 			}
 		} else {
 			_, ok := store.IndexGet("abc.p")

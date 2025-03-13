@@ -10,12 +10,13 @@ import (
 	"testing"
 
 	"github.com/GuanceCloud/cliutils/point"
+	"github.com/GuanceCloud/pipeline-go/constants"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestManger(t *testing.T) {
 	m := NewManager(NewManagerCfg(nil, nil))
-	m.LoadScripts(NSDefault, map[point.Category]map[string]string{
+	m.LoadScripts(constants.NSDefault, map[point.Category]map[string]string{
 		point.Logging: {
 			"abc.p": "if true {}",
 			"def.p": "if true {}",
@@ -28,7 +29,7 @@ func TestManger(t *testing.T) {
 		},
 	}, nil)
 
-	m.LoadScripts(NSRemote, map[point.Category]map[string]string{
+	m.LoadScripts(constants.NSRemote, map[point.Category]map[string]string{
 		point.Logging: {
 			"xyz.p": "if true {}",
 			"def.p": "if true {}",
@@ -66,38 +67,38 @@ func TestManger(t *testing.T) {
 			cat:    point.Logging,
 			source: "abc",
 			name:   [2]string{"abc.p", "abc.p"},
-			ns:     NSDefault,
+			ns:     constants.NSDefault,
 		},
 		{
 			cat:    point.Logging,
 			source: "def",
 			name:   [2]string{"def.p", "def.p"},
-			ns:     NSRemote,
+			ns:     constants.NSRemote,
 		},
 		{
 			cat:    point.Logging,
 			source: "xyz",
 			name:   [2]string{"xyz.p", "xyz.p"},
-			ns:     NSRemote,
+			ns:     constants.NSRemote,
 		},
 		{
 			cat:    point.Logging,
 			source: "x1",
 			name:   [2]string{"a1.p", "def.p"},
-			ns:     NSRemote,
+			ns:     constants.NSRemote,
 		},
 		{
 			cat:    point.Logging,
 			source: "x2",
 			name:   [2]string{"abc.p", "abc.p"},
-			ns:     NSDefault,
+			ns:     constants.NSDefault,
 		},
 
 		{
 			cat:    point.Logging,
 			source: "x3",
 			name:   [2]string{"x3.p", "def.p"},
-			ns:     NSRemote,
+			ns:     constants.NSRemote,
 		},
 		{
 			cat:      point.DialTesting,
@@ -123,8 +124,8 @@ func TestManger(t *testing.T) {
 						t.Error("not found")
 						return
 					}
-					assert.Equal(t, tt.name[1], s.name)
-					assert.Equal(t, tt.ns, s.ns)
+					assert.Equal(t, tt.name[1], s.Name())
+					assert.Equal(t, tt.ns, s.NS())
 				} else {
 					if !tt.notFound {
 						t.Error("found")

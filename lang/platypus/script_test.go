@@ -1,15 +1,12 @@
-// Unless explicitly stated otherwise all files in this repository are licensed
-// under the MIT License.
-// This product includes software developed at Guance Cloud (https://www.guance.com/).
-// Copyright 2021-present Guance, Inc.
-
-package manager
+package platypus
 
 import (
 	"testing"
 	"time"
 
 	"github.com/GuanceCloud/cliutils/point"
+	"github.com/GuanceCloud/pipeline-go/constants"
+	"github.com/GuanceCloud/pipeline-go/lang"
 	"github.com/GuanceCloud/pipeline-go/ptinput"
 	"github.com/stretchr/testify/assert"
 )
@@ -17,7 +14,8 @@ import (
 func TestScript(t *testing.T) {
 	ret, retErr := NewScripts(map[string]string{
 		"abc.p": "if true {}",
-	}, nil, NSGitRepo, point.Logging)
+	}, lang.WithNS(constants.NSGitRepo),
+		lang.WithCat(point.Logging))
 
 	if len(retErr) > 0 {
 		t.Fatal(retErr)
@@ -33,15 +31,15 @@ func TestScript(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	assert.Equal(t, plpt.Fields(), map[string]interface{}{"status": DefaultStatus})
+	assert.Equal(t, plpt.Fields(), map[string]interface{}{"status": constants.DefaultStatus})
 	assert.Equal(t, 0, len(plpt.Tags()))
 	assert.Equal(t, "abc.p", s.Name())
 	assert.Equal(t, point.Logging, s.Category())
-	assert.Equal(t, s.NS(), NSGitRepo)
+	assert.Equal(t, s.NS(), constants.NSGitRepo)
 
 	//nolint:dogsled
 	plpt = ptinput.NewPlPt(point.Logging, "ng", nil, nil, time.Now())
-	err = s.Run(plpt, nil, &Option{DisableAddStatusField: true})
+	err = s.Run(plpt, nil, &lang.LogOption{DisableAddStatusField: true})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -56,9 +54,9 @@ func TestScript(t *testing.T) {
 
 	//nolint:dogsled
 	plpt = ptinput.NewPlPt(point.Logging, "ng", nil, nil, time.Now())
-	err = s.Run(plpt, nil, &Option{
+	err = s.Run(plpt, nil, &lang.LogOption{
 		DisableAddStatusField: false,
-		IgnoreStatus:          []string{DefaultStatus},
+		IgnoreStatus:          []string{constants.DefaultStatus},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -69,8 +67,10 @@ func TestScript(t *testing.T) {
 }
 
 func TestDrop(t *testing.T) {
-	ret, retErr := NewScripts(map[string]string{"abc.p": "add_key(a, \"a\"); add_key(status, \"debug\"); drop(); add_key(b, \"b\")"},
-		nil, NSGitRepo, point.Logging)
+	ret, retErr := NewScripts(map[string]string{
+		"abc.p": "add_key(a, \"a\"); add_key(status, \"debug\"); drop(); add_key(b, \"b\")"},
+		lang.WithNS(constants.NSGitRepo),
+		lang.WithCat(point.Logging))
 	if len(retErr) > 0 {
 		t.Fatal(retErr)
 	}

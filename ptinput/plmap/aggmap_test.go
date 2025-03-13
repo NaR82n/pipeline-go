@@ -20,7 +20,7 @@ func TestAggBuckets(t *testing.T) {
 		return nil
 	}
 
-	buks := NewAggBuks(fn, nil)
+	buks := NewAggBkt(fn, nil)
 	buks.CreateBucket(point.Metric, "bucket_a", time.Second*5, 0, false, nil)
 	buks.CreateBucket(point.Metric, "bucket_a", time.Second, 0, false, nil)
 	buks.CreateBucket(point.Metric, "bucket_a", time.Second, 0, false, nil)
@@ -55,7 +55,7 @@ func TestAggBuckets2(t *testing.T) {
 		return nil
 	}
 
-	buks := NewAggBuks(fn, nil)
+	buks := NewAggBkt(fn, nil)
 	buks.CreateBucket(point.Metric, "bucket_a", time.Second*5, 0, false, nil)
 	buks.CreateBucket(point.Metric, "bucket_a", 0, 2, false, nil)
 	buks.CreateBucket(point.Metric, "bucket_a", 0, 2, false, nil)
