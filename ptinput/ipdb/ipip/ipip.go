@@ -37,6 +37,23 @@ const (
 	CfgIPIPLanguage = "ipip_language"
 )
 
+func NewIPIP(dir string, config map[string]string) *IPIP {
+	ipip := &IPIP{}
+	ipip.cfg.dir = dir
+
+	if v, ok := config[CfgIPIPFile]; ok {
+		ipip.cfg.file = v
+	}
+
+	if v, ok := config[CfgIPIPLanguage]; ok {
+		ipip.cfg.lang = v
+	}
+	ipip.db, ipip.lang = newIPDB(ipip.cfg)
+
+	return ipip
+}
+
+// Init deprecated
 func (ipip *IPIP) Init(dataDir string, config map[string]string) {
 	ipip.cfg.dir = dataDir
 
@@ -166,5 +183,5 @@ func (ipip *IPIP) Geo(ip string) (*ipdb.IPdbRecord, error) {
 		rec.Country = c.CountryName
 	}
 
-	return rec, nil
+	return rec.CheckData(), nil
 }
