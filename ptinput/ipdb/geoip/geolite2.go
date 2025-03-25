@@ -17,7 +17,10 @@ import (
 	"github.com/oschwald/geoip2-golang"
 )
 
-const INVALIDIP = "Invalid IP address"
+const (
+	INVALIDIP    = "Invalid IP address"
+	CfgGeoIPFile = "geoip_file"
+)
 
 var _ ipdb.IPdb = (*Geoip)(nil)
 
@@ -54,12 +57,31 @@ func (g *Geoip) loadIPLib(f string) error {
 	return nil
 }
 
+func NewGeoip(dir string, config map[string]string) *Geoip {
+	g := Geoip{}
+
+	ipdbFile := "GeoLite2-City.mmdb"
+
+	if file, ok := config[CfgGeoIPFile]; ok {
+		if len(file) > 0 {
+			ipdbFile = file
+		}
+	}
+
+	if err := g.loadIPLib(filepath.Join(dir, ipdbFile)); err != nil {
+		l.Warnf("geolite2 load ip lib error: %s", err.Error())
+	}
+
+	return &g
+}
+
+// Init deprecated
 func (g *Geoip) Init(dataDir string, config map[string]string) {
 	l.Debug("use geolite2 db")
 	ipdbDir := filepath.Join(dataDir, "ipdb", "geolite2", "GeoLite2-City_20220617")
 	ipdbFile := "GeoLite2-City.mmdb"
 
-	if file, ok := config["geoip_file"]; ok {
+	if file, ok := config[CfgGeoIPFile]; ok {
 		if len(file) > 0 {
 			ipdbFile = file
 		}
@@ -94,7 +116,7 @@ func (g *Geoip) Geo(ip string) (*ipdb.IPdbRecord, error) {
 	if len(r.Subdivisions) != 0 {
 		record.Region = r.Subdivisions[0].Names["en"]
 	}
-	record.Country = r.Country.Names["en"]
+	record.Country = r.Country.IsoCode
 	record.Isp = g.SearchIsp(ip)
 
 	return record.CheckData(), err
