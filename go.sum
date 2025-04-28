@@ -4,8 +4,8 @@ github.com/DataDog/datadog-agent/pkg/obfuscate v0.47.1 h1:KILbqSN3VXtfzQAzAMemgE
 github.com/DataDog/datadog-agent/pkg/obfuscate v0.47.1/go.mod h1:e933RWa4kAWuHi5jpzEuOiULlv21HcCFEVIYegmaB5c=
 github.com/DataDog/datadog-go/v5 v5.1.1 h1:JLZ6s2K1pG2h9GkvEvMdEGqMDyVLEAccdX5TltWcLMU=
 github.com/DataDog/datadog-go/v5 v5.1.1/go.mod h1:KhiYb2Badlv9/rofz+OznKoEF5XKTonWyhx5K83AP8E=
-github.com/GuanceCloud/cliutils v1.1.22-0.20250228095532-45404b6345b3 h1:io85Q6hfJApv3vp0mVreT/148bI9jUb8i4c1THaEyd8=
-github.com/GuanceCloud/cliutils v1.1.22-0.20250228095532-45404b6345b3/go.mod h1:MzfxIPSK9XoUD6kW72WtHoFl5qk0eYHbVt3m/aYLrpg=
+github.com/GuanceCloud/cliutils v1.1.22-0.20250423115841-118da498760e h1:ZWXD/jjzQ8leOuN8MBsrzkOZ92FzhFX6hR8AJgCWkkk=
+github.com/GuanceCloud/cliutils v1.1.22-0.20250423115841-118da498760e/go.mod h1:A9IifVTE4+h6rK7rgvzXoMVwe+wl75UPuM+sqYhjepQ=
 github.com/GuanceCloud/grok v1.1.4 h1:+w/U5a54cgY0O+dvfcKc2qD3JuhmaS8Hi29BM4QMYts=
 github.com/GuanceCloud/grok v1.1.4/go.mod h1:AHkJZYf7Qbo1FTZT6htdyScpICpgnkQ5+Hc0EmA88vM=
 github.com/GuanceCloud/influxdb1-client v0.1.8 h1:7XNICWcW+NxAHFkzQ8mkOCKA/8U2WNH5m+Hm9g0vz4k=

@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/DataDog/datadog-agent/pkg/obfuscate v0.47.1
-	github.com/GuanceCloud/cliutils v1.1.22-0.20250228095532-45404b6345b3
+	github.com/GuanceCloud/cliutils v1.1.22-0.20250423115841-118da498760e
 	github.com/GuanceCloud/grok v1.1.4
 	github.com/GuanceCloud/platypus v0.3.1
 	github.com/antchfx/xmlquery v1.3.18
