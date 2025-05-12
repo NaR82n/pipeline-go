@@ -1344,14 +1344,14 @@ printf("%v", time_now("s"))
 
 ## `trigger` {#fn-trigger}
 
-函数原型： `fn trigger(result: int|float|bool|str, level: str = "", dim_tags: map = {}, related_data: map = {})`
+函数原型： `fn trigger(result: int|float|bool|str, status: str = "", dim_tags: map = {}, related_data: map = {})`
 
 函数描述： Trigger a security event.
 
 函数参数：
 
 - `result`: Event check result.
-- `level`: Event level. One of: (`critical`, `high`, `medium`, `low`, `info`).
+- `status`: Event status. One of: (`critical`, `high`, `medium`, `low`, `info`).
 - `dim_tags`: Dimension tags.
 - `related_data`: Related data.
 
@@ -1366,9 +1366,9 @@ trigger(1, "critical", {"tag_abc": "1"}, {"a": "1", "a1": 2.1})
 
 trigger(2, dim_tags={"a": "1", "b": "2"}, related_data={"b": {}})
 
-trigger(false, related_data={"a": 1, "b": 2}, level="critical")
+trigger(false, related_data={"a": 1, "b": 2}, status="critical")
 
-trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, level="critical")
+trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, status="critical")
 ```
 
 标准输出:
@@ -1381,7 +1381,7 @@ trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, level="critical"
 [
     {
         "result": 1,
-        "level": "critical",
+        "status": "critical",
         "dim_tags": {
             "tag_abc": "1"
         },
@@ -1392,7 +1392,7 @@ trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, level="critical"
     },
     {
         "result": 2,
-        "level": "",
+        "status": "",
         "dim_tags": {
             "a": "1",
             "b": "2"
@@ -1403,7 +1403,7 @@ trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, level="critical"
     },
     {
         "result": false,
-        "level": "critical",
+        "status": "critical",
         "dim_tags": {},
         "related_data": {
             "a": 1,
@@ -1412,7 +1412,7 @@ trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, level="critical"
     },
     {
         "result": "hello",
-        "level": "critical",
+        "status": "critical",
         "dim_tags": {},
         "related_data": {
             "a": 1,
