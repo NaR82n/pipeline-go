@@ -1,25 +1,25 @@
-# Arbiter Built-In Function
+# Arbiter 内置函数
 
 ## `append` {#fn-append}
 
-Function prototype: `fn append(li: list, v: ...bool|int|float|str|list|map) -> list`
+函数原型： `fn append(li: list, v: ...bool|int|float|str|list|map) -> list`
 
-Function description: Appends a value to a list.
+函数描述： Appends a value to a list.
 
-Function parameters:
+函数参数：
 
 - `li`: The list to append to.
 - `v`: The value to append.
 
-Function returns:
+函数返回值：
 
 - `list`: The list with the appended value.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = [1, 2, 3]
@@ -27,14 +27,14 @@ v = append(v, 4)
 printf("%v", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 [1,2,3,4]
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 v = [1, 2, 3]
@@ -42,31 +42,32 @@ v = append(v, "a", 1.1)
 printf("%v", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 [1,2,3,"a",1.1]
 ```
+
 ## `b64dec` {#fn-b64dec}
 
-Function prototype: `fn b64dec(data: str) -> (str, bool)`
+函数原型： `fn b64dec(data: str) -> (str, bool)`
 
-Function description: Base64 decoding.
+函数描述： Base64 decoding.
 
-Function parameters:
+函数参数：
 
 - `data`: Data that needs to be base64 decoded.
 
-Function returns:
+函数返回值：
 
 - `str`: The decoded string.
 - `bool`: Whether decoding is successful.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = "aGVsbG8sIHdvcmxk"
@@ -76,31 +77,32 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 hello, world
 ```
+
 ## `b64enc` {#fn-b64enc}
 
-Function prototype: `fn b64enc(data: str) -> (str, bool)`
+函数原型： `fn b64enc(data: str) -> (str, bool)`
 
-Function description: Base64 encoding.
+函数描述： Base64 encoding.
 
-Function parameters:
+函数参数：
 
 - `data`: Data that needs to be base64 encoded.
 
-Function returns:
+函数返回值：
 
 - `str`: The encoded string.
 - `bool`: Whether encoding is successful.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = "hello, world"
@@ -108,31 +110,32 @@ v = b64enc(v)
 printf("%v", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 aGVsbG8sIHdvcmxk
 ```
+
 ## `cast` {#fn-cast}
 
-Function prototype: `fn cast(val: bool|int|float|str, typ: str) -> bool|int|float|str`
+函数原型： `fn cast(val: bool|int|float|str, typ: str) -> bool|int|float|str`
 
-Function description: Convert the value to the target type.
+函数描述： Convert the value to the target type.
 
-Function parameters:
+函数参数：
 
 - `val`: The value of the type to be converted.
 - `typ`: Target type. One of (`bool`, `int`, `float`, `str`).
 
-Function returns:
+函数返回值：
 
 - `bool|int|float|str`: The value after the conversion.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v1 = "1.1"
@@ -153,31 +156,32 @@ printf("%v; %v; %v; %v; %v; %v; %v; %v\n",
 )
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 2.1; 2; -1; 2; false; 1.1; 1; true
 ```
+
 ## `cidr` {#fn-cidr}
 
-Function prototype: `fn cidr(ip: str, mask: str) -> bool`
+函数原型： `fn cidr(ip: str, mask: str) -> bool`
 
-Function description: Check the IP whether in CIDR block
+函数描述： Check the IP whether in CIDR block
 
-Function parameters:
+函数参数：
 
 - `ip`: The ip address
 - `mask`: The CIDR mask
 
-Function returns:
+函数返回值：
 
 - `bool`: Whether the IP is in CIDR block
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 ip = "192.0.2.233"
@@ -185,14 +189,14 @@ if cidr(ip, "192.0.2.1/24") {
 	printf("%s", ip)
 }
 ```
-Standard output:
+标准输出:
 
 ```txt
 192.0.2.233
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 ip = "192.0.2.233"
@@ -200,27 +204,28 @@ if cidr(mask="192.0.1.1/24", ip=ip) {
 	printf("%s", ip)
 }
 ```
-Standard output:
+标准输出:
 
 ```txt
 
 ```
+
 ## `delete` {#fn-delete}
 
-Function prototype: `fn delete(m: map, key: str)`
+函数原型： `fn delete(m: map, key: str)`
 
-Function description: Delete key from the map.
+函数描述： Delete key from the map.
 
-Function parameters:
+函数参数：
 
 - `m`: The map for deleting key
 - `key`: Key need delete from map.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = {
@@ -245,19 +250,20 @@ delete(m=v2, key="b")
 printf("result group 2: %v; %v\n", v1, v2)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 result group 1: {"b":2}; [{"c":1.1}]
 result group 2: {}; {}
 ```
+
 ## `dql` {#fn-dql}
 
-Function prototype: `fn dql(query: str, qtype: str = "dql", limit: int = 2000, offset: int = 0, slimit: int = 2000, time_range: list = []) -> (map, bool)`
+函数原型： `fn dql(query: str, qtype: str = "dql", limit: int = 2000, offset: int = 0, slimit: int = 2000, time_range: list = []) -> (map, bool)`
 
-Function description: Query data from the GuanceCloud using dql or promql.
+函数描述： Query data from the GuanceCloud using dql or promql.
 
-Function parameters:
+函数参数：
 
 - `query`: DQL or PromQL query statements.
 - `qtype`: Query language, One of `dql` or `promql`, default is `dql`.
@@ -266,16 +272,16 @@ Function parameters:
 - `slimit`: Query slimit.
 - `time_range`: Query timestamp range, the default value can be modified externally by the script caller.
 
-Function returns:
+函数返回值：
 
 - `map`: Query response.
 - `bool`: Query execution status
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = dql("M::cpu limit 3 slimit 3")
@@ -287,7 +293,7 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 {
@@ -360,27 +366,28 @@ Standard output:
     "status_code": 200
 }
 ```
+
 ## `dump_json` {#fn-dump_json}
 
-Function prototype: `fn dump_json(v: str, indent: str = "") -> (str, bool)`
+函数原型： `fn dump_json(v: str, indent: str = "") -> (str, bool)`
 
-Function description: Returns the JSON encoding of v.
+函数描述： Returns the JSON encoding of v.
 
-Function parameters:
+函数参数：
 
 - `v`: Object to encode.
 - `indent`: Indentation prefix.
 
-Function returns:
+函数返回值：
 
 - `str`: JSON encoding of v.
 - `bool`: Whether decoding is successful.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = {"a": 1, "b": 2.1}
@@ -390,14 +397,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 {"a":1,"b":2.1}
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 v = {"a": 1, "b": 2.1}
@@ -407,7 +414,7 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 {
@@ -415,16 +422,17 @@ Standard output:
   "b": 2.1
 }
 ```
+
 ## `exit` {#fn-exit}
 
-Function prototype: `fn exit()`
+函数原型： `fn exit()`
 
-Function description: Exit the program
-Function examples:
+函数描述： Exit the program
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 printf("1\n")
@@ -433,76 +441,78 @@ exit()
 printf("3\n")
 	
 ```
-Standard output:
+标准输出:
 
 ```txt
 1
 2
 ```
+
 ## `format_int` {#fn-format_int}
 
-Function prototype: `fn format_int(val: int, base: int) -> str`
+函数原型： `fn format_int(val: int, base: int) -> str`
 
-Function description: Formats an integer into a string.
+函数描述： Formats an integer into a string.
 
-Function parameters:
+函数参数：
 
 - `val`: The integer to format.
 - `base`: The base to use for formatting. Must be between 2 and 36.
 
-Function returns:
+函数返回值：
 
 - `str`: The formatted string.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = format_int(16, 16)
 printf("%s", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 10
 ```
+
 ## `geoip` {#fn-geoip}
 
-Function prototype: `fn geoip(ip: str) -> map`
+函数原型： `fn geoip(ip: str) -> map`
 
-Function description: GeoIP
+函数描述： GeoIP
 
-Function parameters:
+函数参数：
 
 - `ip`: IP address.
 
-Function returns:
+函数返回值：
 
 - `map`: IP geographical information.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = geoip("127.0.0.1")
 printf("%v", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 {"city":"","country":"","isp":"unknown","province":""}
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 ip_addr = "114.114.114.114"
@@ -512,7 +522,7 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
  {
@@ -522,27 +532,28 @@ Standard output:
     "province": "Jiangxi"
 }
 ```
+
 ## `gjson` {#fn-gjson}
 
-Function prototype: `fn gjson(input: str, json_path: str) -> (bool|int|float|str|list|map, bool)`
+函数原型： `fn gjson(input: str, json_path: str) -> (bool|int|float|str|list|map, bool)`
 
-Function description: GJSON provides a fast and easy way to get values from a JSON document.
+函数描述： GJSON provides a fast and easy way to get values from a JSON document.
 
-Function parameters:
+函数参数：
 
 - `input`: JSON format string to parse.
 - `json_path`: JSON path.
 
-Function returns:
+函数返回值：
 
 - `bool|int|float|str|list|map`: Parsed result.
 - `bool`: Parsed status.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v='''{
@@ -564,14 +575,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 37
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 v='''{
@@ -589,14 +600,14 @@ name, ok = gjson(v, "name")
 printf("%v", name)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 {"first": "Tom", "last": "Anderson"}
 ```
 * CASE 2:
 
-Script content:
+脚本内容:
 
 ```py
 v='''[
@@ -608,34 +619,35 @@ net, ok = gjson(v, "0.nets.2")
 printf("%v", net)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 tw
 ```
+
 ## `grok` {#fn-grok}
 
-Function prototype: `fn grok(input: str, pattern: str, extra_patterns: map = {}, trim_space: bool = true) -> (map, bool)`
+函数原型： `fn grok(input: str, pattern: str, extra_patterns: map = {}, trim_space: bool = true) -> (map, bool)`
 
-Function description: Extracts data from a string using a Grok pattern. Grok is based on regular expression syntax, and using regular (named) capture groups in a pattern is equivalent to using a pattern in a pattern. A valid regular expression is also a valid Grok pattern.
+函数描述： Extracts data from a string using a Grok pattern. Grok is based on regular expression syntax, and using regular (named) capture groups in a pattern is equivalent to using a pattern in a pattern. A valid regular expression is also a valid Grok pattern.
 
-Function parameters:
+函数参数：
 
 - `input`: The input string used to extract data.
 - `pattern`: The pattern used to extract data.
 - `extra_patterns`: Additional patterns for parsing patterns.
 - `trim_space`: Whether to trim leading and trailing spaces from the parsed value.
 
-Function returns:
+函数返回值：
 
 - `map`: The parsed result.
 - `bool`: Whether the parsing was successful.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 app_log="2021-01-11T17:43:51.887+0800  DEBUG io  io/io.go:458  post cost 6.87021ms"
@@ -658,7 +670,7 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 {
@@ -668,163 +680,166 @@ Standard output:
   "log_time": "2021-01-11T17:43:51.887+0800"
 }
 ```
+
 ## `hash` {#fn-hash}
 
-Function prototype: `fn hash(text: str, method: str) -> str`
+函数原型： `fn hash(text: str, method: str) -> str`
 
-Function description: 
+函数描述： 
 
-Function parameters:
+函数参数：
 
 - `text`: The string used to calculate the hash.
 - `method`: Hash Algorithms, allowing values including `md5`, `sha1`, `sha256`, `sha512`.
 
-Function returns:
+函数返回值：
 
 - `str`: The hash value.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", hash("abc", "md5"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 900150983cd24fb0d6963f7d28e17f72
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", hash("abc", "sha1"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 a9993e364706816aba3e25717850c26c9cd0d89d
 ```
 * CASE 2:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", hash("abc", "sha256"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
 ```
 * CASE 3:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", hash("abc", "sha512"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f
 ```
 * CASE 4:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", hash("abc", "xx"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 
 ```
+
 ## `len` {#fn-len}
 
-Function prototype: `fn len(val: map|list|str) -> int`
+函数原型： `fn len(val: map|list|str) -> int`
 
-Function description: Get the length of the value. If the value is a string, returns the length of the string. If the value is a list or map, returns the length of the list or map.
+函数描述： Get the length of the value. If the value is a string, returns the length of the string. If the value is a list or map, returns the length of the list or map.
 
-Function parameters:
+函数参数：
 
 - `val`: The value to get the length of.
 
-Function returns:
+函数返回值：
 
 - `int`: The length of the value.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", len("abc"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 3
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", len([1, 2, 3]))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 3
 ```
 * CASE 2:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", len({"a": 1, "b": 2, "c": 3}))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 3
 ```
+
 ## `load_json` {#fn-load_json}
 
-Function prototype: `fn load_json(val: str) -> (bool|int|float|str|list|map, bool)`
+函数原型： `fn load_json(val: str) -> (bool|int|float|str|list|map, bool)`
 
-Function description: Unmarshal json string
+函数描述： Unmarshal json string
 
-Function parameters:
+函数参数：
 
 - `val`: JSON string.
 
-Function returns:
+函数返回值：
 
 - `bool|int|float|str|list|map`: Unmarshal result.
 - `bool`: Unmarshal status.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 jstr = '{"a": 1, "b": 2, "c": 3}'
@@ -834,62 +849,64 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 2
 ```
+
 ## `lowercase` {#fn-lowercase}
 
-Function prototype: `fn lowercase(val: str) -> str`
+函数原型： `fn lowercase(val: str) -> str`
 
-Function description: Converts a string to lowercase.
+函数描述： Converts a string to lowercase.
 
-Function parameters:
+函数参数：
 
 - `val`: The string to convert.
 
-Function returns:
+函数返回值：
 
 - `str`: Returns the lowercase value.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%s", lowercase("ABC"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 abc
 ```
+
 ## `match` {#fn-match}
 
-Function prototype: `fn match(val: str, pattern: str, n: int = 1) -> (list, bool)`
+函数原型： `fn match(val: str, pattern: str, n: int = 1) -> (list, bool)`
 
-Function description: Regular expression matching.
+函数描述： Regular expression matching.
 
-Function parameters:
+函数参数：
 
 - `val`: The string to match.
 - `pattern`: Regular expression pattern.
 - `n`: The number of matches to return. Defaults to 1, -1 for all matches.
 
-Function returns:
+函数返回值：
 
 - `list`: Returns the matched value.
 - `bool`: Returns true if the regular expression matches.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 text="abc def 123 abc def 123"
@@ -899,14 +916,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 [["abc def 123","abc","123"]]
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 text="abc def 123 abc def 123"
@@ -916,32 +933,33 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 [["abc def 123","abc","123"],["abc def 123","abc","123"]]
 ```
+
 ## `parse_date` {#fn-parse_date}
 
-Function prototype: `fn parse_date(date: str, timezone: str = "") -> (int, bool)`
+函数原型： `fn parse_date(date: str, timezone: str = "") -> (int, bool)`
 
-Function description: Parses a date string to a nanoseconds timestamp, support multiple date formats. If the date string not include timezone and no timezone is provided, the local timezone is used.
+函数描述： Parses a date string to a nanoseconds timestamp, support multiple date formats. If the date string not include timezone and no timezone is provided, the local timezone is used.
 
-Function parameters:
+函数参数：
 
 - `date`: The key to use for parsing.
 - `timezone`: The timezone to use for parsing. If 
 
-Function returns:
+函数返回值：
 
 - `int`: The parsed timestamp in nanoseconds.
 - `bool`: Whether the parsing was successful.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = parse_date("2021-12-2T11:55:43.123+0800")
@@ -950,14 +968,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 1638417343123000000
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = parse_date("2021-12-2T11:55:43.123", "+8")
@@ -966,14 +984,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 1638417343123000000
 ```
 * CASE 2:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = parse_date("2021-12-2T11:55:43.123", "Asia/Shanghai")
@@ -982,31 +1000,32 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 1638417343123000000
 ```
+
 ## `parse_duration` {#fn-parse_duration}
 
-Function prototype: `fn parse_duration(s: str) -> (int, bool)`
+函数原型： `fn parse_duration(s: str) -> (int, bool)`
 
-Function description: Parses a golang duration string into a duration. A duration string is a sequence of possibly signed decimal numbers with optional fraction and unit suffixes for each number, such as `300ms`, `-1.5h` or `2h45m`. Valid units are `ns`, `us` (or `μs`), `ms`, `s`, `m`, `h`. 
+函数描述： Parses a golang duration string into a duration. A duration string is a sequence of possibly signed decimal numbers with optional fraction and unit suffixes for each number, such as `300ms`, `-1.5h` or `2h45m`. Valid units are `ns`, `us` (or `μs`), `ms`, `s`, `m`, `h`. 
 
-Function parameters:
+函数参数：
 
 - `s`: The string to parse.
 
-Function returns:
+函数返回值：
 
 - `int`: The duration in nanoseconds.
 - `bool`: Whether the duration is valid.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = parse_duration("1s")
@@ -1015,14 +1034,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 1000000000
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = parse_duration("100ns")
@@ -1031,32 +1050,33 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 100
 ```
+
 ## `parse_int` {#fn-parse_int}
 
-Function prototype: `fn parse_int(val: str, base: int) -> (int, bool)`
+函数原型： `fn parse_int(val: str, base: int) -> (int, bool)`
 
-Function description: Parses a string into an integer.
+函数描述： Parses a string into an integer.
 
-Function parameters:
+函数参数：
 
 - `val`: The string to parse.
 - `base`: The base to use for parsing. Must be between 2 and 36.
 
-Function returns:
+函数返回值：
 
 - `int`: The parsed integer.
 - `bool`: Whether the parsing was successful.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = parse_int("123", 10)
@@ -1065,14 +1085,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 123
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = parse_int("123", 16)	
@@ -1081,104 +1101,107 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 291
 ```
+
 ## `printf` {#fn-printf}
 
-Function prototype: `fn printf(format: str, args: ...str|bool|int|float|list|map)`
+函数原型： `fn printf(format: str, args: ...str|bool|int|float|list|map)`
 
-Function description: Output formatted strings to the standard output device.
+函数描述： Output formatted strings to the standard output device.
 
-Function parameters:
+函数参数：
 
 - `format`: String format.
 - `args`: Argument list, corresponding to the format specifiers in the format string.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 printf("hello, %s", "world")
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 hello, world
 ```
+
 ## `replace` {#fn-replace}
 
-Function prototype: `fn replace(input: str, pattern: str, replacement: str) -> (str, bool)`
+函数原型： `fn replace(input: str, pattern: str, replacement: str) -> (str, bool)`
 
-Function description: Replaces text in a string.
+函数描述： Replaces text in a string.
 
-Function parameters:
+函数参数：
 
 - `input`: The string to replace text in.
 - `pattern`: Regular expression pattern.
 - `replacement`: Replacement text to use.
 
-Function returns:
+函数返回值：
 
 - `str`: The string with text replaced.
 - `bool`: True if the pattern was found and replaced, false otherwise.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = replace("abcdef", "bc", "123")
 printf("%s", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 a123def
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = replace("bonjour; 你好", "[\u4e00-\u9fa5]+", "hello")
 printf("%s", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 bonjour; hello
 ```
+
 ## `sql_cover` {#fn-sql_cover}
 
-Function prototype: `fn sql_cover(val: str) -> (str, bool)`
+函数原型： `fn sql_cover(val: str) -> (str, bool)`
 
-Function description: Obfuscate SQL query string.
+函数描述： Obfuscate SQL query string.
 
-Function parameters:
+函数参数：
 
 - `val`: The sql to obfuscate.
 
-Function returns:
+函数返回值：
 
 - `str`: The obfuscated sql.
 - `bool`: The obfuscate status.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = sql_cover("select abc from def where x > 3 and y < 5")
@@ -1187,14 +1210,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 select abc from def where x > ? and y < ?
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = sql_cover("SELECT $func$INSERT INTO table VALUES ('a', 1, 2)$func$ FROM users")
@@ -1203,14 +1226,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 SELECT ? FROM users
 ```
 * CASE 2:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = sql_cover("SELECT ('/uffd')")
@@ -1219,142 +1242,146 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 SELECT ( ? )
 ```
+
 ## `str_join` {#fn-str_join}
 
-Function prototype: `fn str_join(li: list, sep: str) -> str`
+函数原型： `fn str_join(li: list, sep: str) -> str`
 
-Function description: String join.
+函数描述： String join.
 
-Function parameters:
+函数参数：
 
 - `li`: List to be joined with separator. The elements type need to be string, if not, they will be ignored.
 - `sep`: Separator to be used between elements.
 
-Function returns:
+函数返回值：
 
 - `str`: Joined string.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = str_join(["a", "b", "c"], "##")
 printf("%s", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 a##b##c
 ```
+
 ## `strfmt` {#fn-strfmt}
 
-Function prototype: `fn strfmt(format: str, args: ...bool|int|float|str|list|map) -> str`
+函数原型： `fn strfmt(format: str, args: ...bool|int|float|str|list|map) -> str`
 
-Function description: 
+函数描述： 
 
-Function parameters:
+函数参数：
 
 - `format`: String format.
 - `args`: Parameters to replace placeholders.
 
-Function returns:
+函数返回值：
 
 - `str`: String.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = strfmt("abc %s def %d", "123", 456)
 printf("%s", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 abc 123 def 456
 ```
+
 ## `time_now` {#fn-time_now}
 
-Function prototype: `fn time_now(precision: str = "ns") -> int`
+函数原型： `fn time_now(precision: str = "ns") -> int`
 
-Function description: Get current timestamp with the specified precision.
+函数描述： Get current timestamp with the specified precision.
 
-Function parameters:
+函数参数：
 
 - `precision`: The precision of the timestamp. Supported values: `ns`, `us`, `ms`, `s`.
 
-Function returns:
+函数返回值：
 
 - `int`: Returns the current timestamp.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%v", time_now("s"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 1745823860
 ```
+
 ## `trigger` {#fn-trigger}
 
-Function prototype: `fn trigger(result: int|float|bool|str, level: str = "", dim_tags: map = {}, related_data: map = {})`
+函数原型： `fn trigger(result: int|float|bool|str, status: str = "", dim_tags: map = {}, related_data: map = {})`
 
-Function description: Trigger a security event.
+函数描述： Trigger a security event.
 
-Function parameters:
+函数参数：
 
 - `result`: Event check result.
-- `level`: Event level. One of: (`critical`, `high`, `medium`, `low`, `info`).
+- `status`: Event status. One of: (`critical`, `high`, `medium`, `low`, `info`).
 - `dim_tags`: Dimension tags.
 - `related_data`: Related data.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 trigger(1, "critical", {"tag_abc": "1"}, {"a": "1", "a1": 2.1})
 
 trigger(2, dim_tags={"a": "1", "b": "2"}, related_data={"b": {}})
 
-trigger(false, related_data={"a": 1, "b": 2}, level="critical")
+trigger(false, related_data={"a": 1, "b": 2}, status="critical")
 
-trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, level="critical")
+trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, status="critical")
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 
 ```
-Trigger output:
+触发器输出：
 ```json
 [
     {
         "result": 1,
-        "level": "critical",
+        "status": "critical",
         "dim_tags": {
             "tag_abc": "1"
         },
@@ -1365,7 +1392,7 @@ Trigger output:
     },
     {
         "result": 2,
-        "level": "",
+        "status": "",
         "dim_tags": {
             "a": "1",
             "b": "2"
@@ -1376,7 +1403,7 @@ Trigger output:
     },
     {
         "result": false,
-        "level": "critical",
+        "status": "critical",
         "dim_tags": {},
         "related_data": {
             "a": 1,
@@ -1385,7 +1412,7 @@ Trigger output:
     },
     {
         "result": "hello",
-        "level": "critical",
+        "status": "critical",
         "dim_tags": {},
         "related_data": {
             "a": 1,
@@ -1397,125 +1424,128 @@ Trigger output:
 ]
 
 ```
+
 ## `trim` {#fn-trim}
 
-Function prototype: `fn trim(val: str, cutset: str = "", side: int = 0) -> str`
+函数原型： `fn trim(val: str, cutset: str = "", side: int = 0) -> str`
 
-Function description: Removes leading and trailing whitespace from a string.
+函数描述： Removes leading and trailing whitespace from a string.
 
-Function parameters:
+函数参数：
 
 - `val`: The string to trim.
 - `cutset`: Characters to remove from the beginning and end of the string. If not specified, whitespace is removed.
 - `side`: The side to trim from. If value is 0, trim from both sides. If value is 1, trim from the left side. If value is 2, trim from the right side.
 
-Function returns:
+函数返回值：
 
 - `str`: The trimmed string.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%s", trim(" abcdef "))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 abcdef
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%s", trim("#-abcdef-#", "-#", 2))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 #-abcdef
 ```
 * CASE 2:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%s", trim("#-abcdef-#", "-#", 1))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 abcdef-#
 ```
 * CASE 3:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%s", trim("#-abcdef-#", side=0, cutset="-#"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 abcdef
 ```
+
 ## `uppercase` {#fn-uppercase}
 
-Function prototype: `fn uppercase(val: str) -> str`
+函数原型： `fn uppercase(val: str) -> str`
 
-Function description: Converts a string to uppercase.
+函数描述： Converts a string to uppercase.
 
-Function parameters:
+函数参数：
 
 - `val`: The string to convert.
 
-Function returns:
+函数返回值：
 
 - `str`: Returns the uppercase value.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%s", uppercase("abc"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 ABC
 ```
+
 ## `url_decode` {#fn-url_decode}
 
-Function prototype: `fn url_decode(val: str) -> (str, bool)`
+函数原型： `fn url_decode(val: str) -> (str, bool)`
 
-Function description: Decodes a URL-encoded string.
+函数描述： Decodes a URL-encoded string.
 
-Function parameters:
+函数参数：
 
 - `val`: The URL-encoded string to decode.
 
-Function returns:
+函数返回值：
 
 - `str`: The decoded string.
 - `bool`: The decoding status.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = url_decode("https:%2F%2Fkubernetes.io%2Fdocs%2Freference%2Faccess-authn-authz%2Fbootstrap-tokens%2F")
@@ -1524,31 +1554,32 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/
 ```
+
 ## `url_parse` {#fn-url_parse}
 
-Function prototype: `fn url_parse(url: str) -> (map, bool)`
+函数原型： `fn url_parse(url: str) -> (map, bool)`
 
-Function description: Parses a URL and returns it as a map.
+函数描述： Parses a URL and returns it as a map.
 
-Function parameters:
+函数参数：
 
 - `url`: The URL to parse.
 
-Function returns:
+函数返回值：
 
 - `map`: Returns the parsed URL as a map.
 - `bool`: Returns true if the URL is valid.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v, ok = url_parse("http://www.example.com:8080/path/to/file?query=abc")
@@ -1560,7 +1591,7 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 {
@@ -1575,55 +1606,57 @@ Standard output:
   "scheme": "http"
 }
 ```
+
 ## `user_agent` {#fn-user_agent}
 
-Function prototype: `fn user_agent(header: str) -> map`
+函数原型： `fn user_agent(header: str) -> map`
 
-Function description: Parses a User-Agent header.
+函数描述： Parses a User-Agent header.
 
-Function parameters:
+函数参数：
 
 - `header`: The User-Agent header to parse.
 
-Function returns:
+函数返回值：
 
 - `map`: Returns the parsed User-Agent header as a map.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36")
 printf("%s", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 {"browser":"Chrome","browserVer":"96.0.4664.110","engine":"AppleWebKit","engineVer":"537.36","isBot":false,"isMobile":false,"os":"Intel Mac OS X 10_15_7","ua":"Macintosh"}
 ```
+
 ## `valid_json` {#fn-valid_json}
 
-Function prototype: `fn valid_json(val: str) -> bool`
+函数原型： `fn valid_json(val: str) -> bool`
 
-Function description: Returns true if the value is a valid JSON.
+函数描述： Returns true if the value is a valid JSON.
 
-Function parameters:
+函数参数：
 
 - `val`: The value to check.
 
-Function returns:
+函数返回值：
 
 - `bool`: Returns true if the value is a valid JSON.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 ok = valid_json("{\"a\": 1, \"b\": 2}")
@@ -1632,14 +1665,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 true
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 ok = valid_json("1.1")
@@ -1648,14 +1681,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 true
 ```
 * CASE 2:
 
-Script content:
+脚本内容:
 
 ```py
 ok = valid_json("str_abc_def")
@@ -1664,88 +1697,90 @@ if !ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 false
 ```
+
 ## `value_type` {#fn-value_type}
 
-Function prototype: `fn value_type(val: str) -> str`
+函数原型： `fn value_type(val: str) -> str`
 
-Function description: Returns the type of the value.
+函数描述： Returns the type of the value.
 
-Function parameters:
+函数参数：
 
 - `val`: The value to get the type of.
 
-Function returns:
+函数返回值：
 
 - `str`: Returns the type of the value. One of (`bool`, `int`, `float`, `str`, `list`, `map`, `nil`). If the value and the type is nil, returns `nil`.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 v = value_type(1)
 printf("%s", v)
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 int
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%s", value_type("abc"))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 str
 ```
 * CASE 2:
 
-Script content:
+脚本内容:
 
 ```py
 printf("%s", value_type(true))
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 bool
 ```
+
 ## `xml_query` {#fn-xml_query}
 
-Function prototype: `fn xml_query(input: str, xpath: str) -> (str, bool)`
+函数原型： `fn xml_query(input: str, xpath: str) -> (str, bool)`
 
-Function description: Returns the value of an XML field.
+函数描述： Returns the value of an XML field.
 
-Function parameters:
+函数参数：
 
 - `input`: The XML input to get the value of.
 - `xpath`: The XPath expression to get the value of.
 
-Function returns:
+函数返回值：
 
 - `str`: Returns the value of the XML field.
 - `bool`: Returns true if the field exists, false otherwise.
 
-Function examples:
+函数示例：
 
 * CASE 0:
 
-Script content:
+脚本内容:
 
 ```py
 xml_data='''
@@ -1760,14 +1795,14 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 ORD12345
 ```
 * CASE 1:
 
-Script content:
+脚本内容:
 
 ```py
 xml_data='''
@@ -1782,7 +1817,7 @@ if ok {
 }
 ```
 
-Standard output:
+标准输出:
 
 ```txt
 5

@@ -307,32 +307,32 @@ var cTrigger = &FuncExample{
 
 trigger(2, dim_tags={"a": "1", "b": "2"}, related_data={"b": {}})
 
-trigger(false, related_data={"a": 1, "b": 2}, level="critical")
+trigger(false, related_data={"a": 1, "b": 2}, status="critical")
 
-trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, level="critical")
+trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, status="critical")
 `,
 			TriggerResult: []trigger.Data{
 				{
 					Result:      int64(1),
-					Level:       "critical",
+					Status:      "critical",
 					DimTags:     map[string]string{"tag_abc": "1"},
 					RelatedData: map[string]any{"a": "1", "a1": float64(2.1)},
 				},
 				{
 					Result:      int64(2),
-					Level:       "",
+					Status:      "",
 					DimTags:     map[string]string{"a": "1", "b": "2"},
 					RelatedData: map[string]any{"b": map[string]any{}},
 				},
 				{
 					Result:      false,
-					Level:       "critical",
+					Status:      "critical",
 					DimTags:     map[string]string{},
 					RelatedData: map[string]any{"a": int64(1), "b": int64(2)},
 				},
 				{
 					Result:      "hello",
-					Level:       "critical",
+					Status:      "critical",
 					DimTags:     map[string]string{},
 					RelatedData: map[string]any{"a": int64(1), "b": []any{int64(1)}},
 				},
