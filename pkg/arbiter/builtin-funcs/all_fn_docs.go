@@ -53,9 +53,18 @@ func GenDocs(e map[string]*FuncExample, f map[string]*runtimev2.Fn) []*DocVarb {
 	return r
 }
 
-func GenerateDocs() (string, error) {
+// GenerateDocs used to generate function docs, lang is zh or en
+func GenerateDocs(lang string) (string, error) {
 	var r string
-	docBuf, err := os.ReadFile("./docs/FnDocs.tmpl")
+	var tmplLang string
+	switch lang {
+	case "zh", "zh-cn":
+		tmplLang = "./docs/function_doc.zh.tmpl"
+	default:
+		tmplLang = "./docs/function_doc.tmpl"
+	}
+
+	docBuf, err := os.ReadFile(tmplLang)
 	if err != nil {
 		return "", err
 	}

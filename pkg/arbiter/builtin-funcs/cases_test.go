@@ -13,9 +13,12 @@ import (
 )
 
 func TestDocs(t *testing.T) {
-	d, err := GenerateDocs()
+	d, err := GenerateDocs("zh")
 	assert.NoError(t, err)
-	_ = os.WriteFile("docs/docs.md", []byte(d), 0644)
+	_ = os.WriteFile("docs/function_doc.zh.md", []byte(d), 0644)
+	d, err = GenerateDocs("en")
+	assert.NoError(t, err)
+	_ = os.WriteFile("docs/function_doc.md", []byte(d), 0644)
 }
 
 func TestDocsJSON(t *testing.T) {

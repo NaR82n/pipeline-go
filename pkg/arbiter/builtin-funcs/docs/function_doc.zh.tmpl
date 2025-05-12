@@ -1,0 +1,40 @@
+# Arbiter 内置函数
+{{range .}}
+## `{{.Name}}` {#fn-{{.Name}}}
+
+函数原型： `{{signature .FnDesc}}`
+
+函数描述： {{.FnDesc.Desc}}{{if gt (len .FnDesc.Params) 0}}
+
+函数参数：
+{{range .FnDesc.Params}}
+- `{{.Name}}`: {{.Desc}}{{end}}
+{{end}}{{if gt (len .FnDesc.Returns) 0}}
+函数返回值：
+{{range .FnDesc.Returns}}
+- `{{typestr .}}`: {{.Desc}}{{end}}
+{{end}}{{if .FnExp}}
+函数示例：
+{{range $index, $element := .FnExp.Progs}}
+* CASE {{$index}}:
+
+脚本内容:
+{{if (endsWithNewline $element.Script)}}
+```py
+{{.Script}}```
+{{else}}
+```py
+{{.Script}}
+```{{end}}
+标准输出:
+{{if (endsWithNewline $element.Stdout)}}
+```txt
+{{$element.Stdout}}```{{else}}
+```txt
+{{$element.Stdout}}
+```{{end}}{{if gt (len $element.TriggerResult) 0}}
+触发器输出：
+```json
+{{trigger_output $element.TriggerResult}}
+```{{end}}{{end}}{{end}}
+{{end}}

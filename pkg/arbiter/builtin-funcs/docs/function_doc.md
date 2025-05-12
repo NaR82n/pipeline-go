@@ -47,6 +47,7 @@ Standard output:
 ```txt
 [1,2,3,"a",1.1]
 ```
+
 ## `b64dec` {#fn-b64dec}
 
 Function prototype: `fn b64dec(data: str) -> (str, bool)`
@@ -81,6 +82,7 @@ Standard output:
 ```txt
 hello, world
 ```
+
 ## `b64enc` {#fn-b64enc}
 
 Function prototype: `fn b64enc(data: str) -> (str, bool)`
@@ -113,6 +115,7 @@ Standard output:
 ```txt
 aGVsbG8sIHdvcmxk
 ```
+
 ## `cast` {#fn-cast}
 
 Function prototype: `fn cast(val: bool|int|float|str, typ: str) -> bool|int|float|str`
@@ -158,6 +161,7 @@ Standard output:
 ```txt
 2.1; 2; -1; 2; false; 1.1; 1; true
 ```
+
 ## `cidr` {#fn-cidr}
 
 Function prototype: `fn cidr(ip: str, mask: str) -> bool`
@@ -205,6 +209,7 @@ Standard output:
 ```txt
 
 ```
+
 ## `delete` {#fn-delete}
 
 Function prototype: `fn delete(m: map, key: str)`
@@ -251,6 +256,7 @@ Standard output:
 result group 1: {"b":2}; [{"c":1.1}]
 result group 2: {}; {}
 ```
+
 ## `dql` {#fn-dql}
 
 Function prototype: `fn dql(query: str, qtype: str = "dql", limit: int = 2000, offset: int = 0, slimit: int = 2000, time_range: list = []) -> (map, bool)`
@@ -360,6 +366,7 @@ Standard output:
     "status_code": 200
 }
 ```
+
 ## `dump_json` {#fn-dump_json}
 
 Function prototype: `fn dump_json(v: str, indent: str = "") -> (str, bool)`
@@ -415,6 +422,7 @@ Standard output:
   "b": 2.1
 }
 ```
+
 ## `exit` {#fn-exit}
 
 Function prototype: `fn exit()`
@@ -439,6 +447,7 @@ Standard output:
 1
 2
 ```
+
 ## `format_int` {#fn-format_int}
 
 Function prototype: `fn format_int(val: int, base: int) -> str`
@@ -470,6 +479,7 @@ Standard output:
 ```txt
 10
 ```
+
 ## `geoip` {#fn-geoip}
 
 Function prototype: `fn geoip(ip: str) -> map`
@@ -522,6 +532,7 @@ Standard output:
     "province": "Jiangxi"
 }
 ```
+
 ## `gjson` {#fn-gjson}
 
 Function prototype: `fn gjson(input: str, json_path: str) -> (bool|int|float|str|list|map, bool)`
@@ -613,6 +624,7 @@ Standard output:
 ```txt
 tw
 ```
+
 ## `grok` {#fn-grok}
 
 Function prototype: `fn grok(input: str, pattern: str, extra_patterns: map = {}, trim_space: bool = true) -> (map, bool)`
@@ -668,6 +680,7 @@ Standard output:
   "log_time": "2021-01-11T17:43:51.887+0800"
 }
 ```
+
 ## `hash` {#fn-hash}
 
 Function prototype: `fn hash(text: str, method: str) -> str`
@@ -750,6 +763,7 @@ Standard output:
 ```txt
 
 ```
+
 ## `len` {#fn-len}
 
 Function prototype: `fn len(val: map|list|str) -> int`
@@ -805,6 +819,7 @@ Standard output:
 ```txt
 3
 ```
+
 ## `load_json` {#fn-load_json}
 
 Function prototype: `fn load_json(val: str) -> (bool|int|float|str|list|map, bool)`
@@ -839,6 +854,7 @@ Standard output:
 ```txt
 2
 ```
+
 ## `lowercase` {#fn-lowercase}
 
 Function prototype: `fn lowercase(val: str) -> str`
@@ -868,6 +884,7 @@ Standard output:
 ```txt
 abc
 ```
+
 ## `match` {#fn-match}
 
 Function prototype: `fn match(val: str, pattern: str, n: int = 1) -> (list, bool)`
@@ -921,6 +938,7 @@ Standard output:
 ```txt
 [["abc def 123","abc","123"],["abc def 123","abc","123"]]
 ```
+
 ## `parse_date` {#fn-parse_date}
 
 Function prototype: `fn parse_date(date: str, timezone: str = "") -> (int, bool)`
@@ -987,6 +1005,7 @@ Standard output:
 ```txt
 1638417343123000000
 ```
+
 ## `parse_duration` {#fn-parse_duration}
 
 Function prototype: `fn parse_duration(s: str) -> (int, bool)`
@@ -1036,6 +1055,7 @@ Standard output:
 ```txt
 100
 ```
+
 ## `parse_int` {#fn-parse_int}
 
 Function prototype: `fn parse_int(val: str, base: int) -> (int, bool)`
@@ -1086,6 +1106,7 @@ Standard output:
 ```txt
 291
 ```
+
 ## `printf` {#fn-printf}
 
 Function prototype: `fn printf(format: str, args: ...str|bool|int|float|list|map)`
@@ -1112,6 +1133,7 @@ Standard output:
 ```txt
 hello, world
 ```
+
 ## `replace` {#fn-replace}
 
 Function prototype: `fn replace(input: str, pattern: str, replacement: str) -> (str, bool)`
@@ -1159,6 +1181,7 @@ Standard output:
 ```txt
 bonjour; hello
 ```
+
 ## `sql_cover` {#fn-sql_cover}
 
 Function prototype: `fn sql_cover(val: str) -> (str, bool)`
@@ -1224,6 +1247,7 @@ Standard output:
 ```txt
 SELECT ( ? )
 ```
+
 ## `str_join` {#fn-str_join}
 
 Function prototype: `fn str_join(li: list, sep: str) -> str`
@@ -1255,6 +1279,7 @@ Standard output:
 ```txt
 a##b##c
 ```
+
 ## `strfmt` {#fn-strfmt}
 
 Function prototype: `fn strfmt(format: str, args: ...bool|int|float|str|list|map) -> str`
@@ -1286,6 +1311,7 @@ Standard output:
 ```txt
 abc 123 def 456
 ```
+
 ## `time_now` {#fn-time_now}
 
 Function prototype: `fn time_now(precision: str = "ns") -> int`
@@ -1315,6 +1341,7 @@ Standard output:
 ```txt
 1745823860
 ```
+
 ## `trigger` {#fn-trigger}
 
 Function prototype: `fn trigger(result: int|float|bool|str, level: str = "", dim_tags: map = {}, related_data: map = {})`
@@ -1397,6 +1424,7 @@ Trigger output:
 ]
 
 ```
+
 ## `trim` {#fn-trim}
 
 Function prototype: `fn trim(val: str, cutset: str = "", side: int = 0) -> str`
@@ -1467,6 +1495,7 @@ Standard output:
 ```txt
 abcdef
 ```
+
 ## `uppercase` {#fn-uppercase}
 
 Function prototype: `fn uppercase(val: str) -> str`
@@ -1496,6 +1525,7 @@ Standard output:
 ```txt
 ABC
 ```
+
 ## `url_decode` {#fn-url_decode}
 
 Function prototype: `fn url_decode(val: str) -> (str, bool)`
@@ -1529,6 +1559,7 @@ Standard output:
 ```txt
 https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/
 ```
+
 ## `url_parse` {#fn-url_parse}
 
 Function prototype: `fn url_parse(url: str) -> (map, bool)`
@@ -1575,6 +1606,7 @@ Standard output:
   "scheme": "http"
 }
 ```
+
 ## `user_agent` {#fn-user_agent}
 
 Function prototype: `fn user_agent(header: str) -> map`
@@ -1605,6 +1637,7 @@ Standard output:
 ```txt
 {"browser":"Chrome","browserVer":"96.0.4664.110","engine":"AppleWebKit","engineVer":"537.36","isBot":false,"isMobile":false,"os":"Intel Mac OS X 10_15_7","ua":"Macintosh"}
 ```
+
 ## `valid_json` {#fn-valid_json}
 
 Function prototype: `fn valid_json(val: str) -> bool`
@@ -1669,6 +1702,7 @@ Standard output:
 ```txt
 false
 ```
+
 ## `value_type` {#fn-value_type}
 
 Function prototype: `fn value_type(val: str) -> str`
@@ -1725,6 +1759,7 @@ Standard output:
 ```txt
 bool
 ```
+
 ## `xml_query` {#fn-xml_query}
 
 Function prototype: `fn xml_query(input: str, xpath: str) -> (str, bool)`
@@ -1787,3 +1822,5 @@ Standard output:
 ```txt
 5
 ```
+
+
