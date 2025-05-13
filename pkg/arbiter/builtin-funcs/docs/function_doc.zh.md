@@ -1382,7 +1382,7 @@ trigger("hello", dimension_tags={}, related_data={"a":1, "b":[1]}, status="criti
     {
         "result": 1,
         "status": "critical",
-        "dim_tags": {
+        "dimension_tags": {
             "tag_abc": "1"
         },
         "related_data": {
@@ -1393,7 +1393,7 @@ trigger("hello", dimension_tags={}, related_data={"a":1, "b":[1]}, status="criti
     {
         "result": 2,
         "status": "",
-        "dim_tags": {
+        "dimension_tags": {
             "a": "1",
             "b": "2"
         },
@@ -1404,7 +1404,7 @@ trigger("hello", dimension_tags={}, related_data={"a":1, "b":[1]}, status="criti
     {
         "result": false,
         "status": "critical",
-        "dim_tags": {},
+        "dimension_tags": {},
         "related_data": {
             "a": 1,
             "b": 2
@@ -1413,7 +1413,7 @@ trigger("hello", dimension_tags={}, related_data={"a":1, "b":[1]}, status="criti
     {
         "result": "hello",
         "status": "critical",
-        "dim_tags": {},
+        "dimension_tags": {},
         "related_data": {
             "a": 1,
             "b": [
