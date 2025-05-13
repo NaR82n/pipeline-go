@@ -25,7 +25,7 @@ var FnTriggerDesc = runtimev2.FnDesc{
 			},
 		},
 		{
-			Name: "dim_tags",
+			Name: "dimension_tags",
 			Desc: "Dimension tags.",
 			Typs: []ast.DType{ast.Map},
 			Val: func() any {
