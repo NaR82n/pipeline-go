@@ -66,10 +66,6 @@ var FnDQLDesc = runtimev2.FnDesc{
 			Desc: "Query response.",
 			Typs: []ast.DType{ast.Map},
 		},
-		{
-			Desc: "Query execution status",
-			Typs: []ast.DType{ast.Bool},
-		},
 	},
 }
 
@@ -90,18 +86,6 @@ func FnDQL(ctx *runtimev2.Task, expr *ast.CallExpr) *errchain.PlError {
 	if dqlCli == nil {
 		return runtimev2.NewRunError(ctx, fmt.Sprintf(
 			"context data %s value is nil", PDQLCli), expr.NamePos)
-	}
-
-	var r map[string]any
-
-	p := make([]any, 6)
-
-	for i := range p {
-		var err *errchain.PlError
-		p[i], err = runtimev2.GetParam(ctx, expr, FnDQLDesc.Params, i)
-		if err != nil {
-			return err
-		}
 	}
 
 	query, err := runtimev2.GetParamString(ctx, expr, FnDQLDesc.Params, 0)
@@ -136,13 +120,10 @@ func FnDQL(ctx *runtimev2.Task, expr *ast.CallExpr) *errchain.PlError {
 
 	r, errQ := dqlCli.Query(query, qtype, limit, offset, slimit, timeRange)
 	if errQ != nil {
-		ctx.Regs.ReturnAppend(
-			runtimev2.V{V: (map[string]any)(nil), T: ast.Map},
-			runtimev2.V{V: false, T: ast.Bool})
+		return runtimev2.NewRunError(ctx, err.Error(), expr.NamePos)
 	} else {
 		ctx.Regs.ReturnAppend(
-			runtimev2.V{V: r, T: ast.Map},
-			runtimev2.V{V: true, T: ast.Bool})
+			runtimev2.V{V: r, T: ast.Map})
 	}
 	return nil
 }

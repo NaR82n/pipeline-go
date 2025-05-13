@@ -183,12 +183,10 @@ var cDQL = &FuncExample{
 	Progs: []ProgCase{
 		{
 			Name: "dql",
-			Script: `v, ok = dql("M::cpu limit 3 slimit 3")
+			Script: `v = dql("M::cpu limit 2 slimit 2")
+v, ok = dump_json(v, "    ")
 if ok {
-	v, ok = dump_json(v, "    ")
-	if ok {
-		printf("%v", v)
-	}
+	printf("%v", v)
 }
 `,
 			jsonout: true,
@@ -264,6 +262,25 @@ if ok {
 	},
 }
 
+var _ = AddExps(cDQLSeriesGet)
+var cDQLSeriesGet = &FuncExample{
+	FnName: FnDQLSeriesGetDesc.Name,
+	Progs: []ProgCase{
+		{
+			Name: "dql_series_get",
+			Script: `v = dql("M::cpu limit 2 slimit 2") 
+
+hostLi = dql_series_get(v, "host")
+time_li = dql_series_get(v, "time")
+
+printf("%v", {"host": hostLi, "time": time_li})
+`,
+			jsonout: true,
+			Stdout: `{"host":[["172.16.241.111","172.16.241.111"],["172.16.242.112","172.16.242.112"]],` +
+				`"time":[[1744866108991,1744866103991],[1744866107975,1744866102975]]}`,
+		},
+	},
+}
 var _ = AddExps(cDumpJSON)
 var cDumpJSON = &FuncExample{
 	FnName: FnDumpJSONDesc.Name,
