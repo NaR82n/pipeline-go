@@ -5,10 +5,10 @@ import (
 )
 
 type Data struct {
-	Result      any               `json:"result"`
-	Status      string            `json:"status"`
-	DimTags     map[string]string `json:"dim_tags"`
-	RelatedData map[string]any    `json:"related_data"`
+	Result        any               `json:"result"`
+	Status        string            `json:"status"`
+	DimensionTags map[string]string `json:"dimension_tags"`
+	RelatedData   map[string]any    `json:"related_data"`
 }
 
 type Trigger struct {
@@ -33,10 +33,10 @@ func (tr *Trigger) Trigger(result any, status string, dimTags, relatedData map[s
 	}
 
 	tr.vals = append(tr.vals, Data{
-		Result:      result,
-		Status:      status,
-		DimTags:     tags,
-		RelatedData: relatedData,
+		Result:        result,
+		Status:        status,
+		DimensionTags: tags,
+		RelatedData:   relatedData,
 	})
 }
 
