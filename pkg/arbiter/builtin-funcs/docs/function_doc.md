@@ -259,7 +259,7 @@ result group 2: {}; {}
 
 ## `dql` {#fn-dql}
 
-Function prototype: `fn dql(query: str, qtype: str = "dql", limit: int = 2000, offset: int = 0, slimit: int = 2000, time_range: list = []) -> (map, bool)`
+Function prototype: `fn dql(query: str, qtype: str = "dql", limit: int = 2000, offset: int = 0, slimit: int = 2000, time_range: list = []) -> map`
 
 Function description: Query data from the GuanceCloud using dql or promql.
 
@@ -275,7 +275,6 @@ Function parameters:
 Function returns:
 
 - `map`: Query response.
-- `bool`: Query execution status
 
 Function examples:
 
@@ -284,12 +283,10 @@ Function examples:
 Script content:
 
 ```py
-v, ok = dql("M::cpu limit 3 slimit 3")
+v = dql("M::cpu limit 2 slimit 2")
+v, ok = dump_json(v, "    ")
 if ok {
-	v, ok = dump_json(v, "    ")
-	if ok {
-		printf("%v", v)
-	}
+	printf("%v", v)
 }
 ```
 
@@ -365,6 +362,42 @@ Standard output:
     ],
     "status_code": 200
 }
+```
+
+## `dql_series_get` {#fn-dql_series_get}
+
+Function prototype: `fn dql_series_get(series: map, name: str) -> list`
+
+Function description: get series data
+
+Function parameters:
+
+- `series`: dql query result
+- `name`: column or tag name
+
+Function returns:
+
+- `list`: specified column or tag value for the series
+
+Function examples:
+
+* CASE 0:
+
+Script content:
+
+```py
+v = dql("M::cpu limit 2 slimit 2") 
+
+hostLi = dql_series_get(v, "host")
+time_li = dql_series_get(v, "time")
+
+printf("%v", {"host": hostLi, "time": time_li})
+```
+
+Standard output:
+
+```txt
+{"host":[["172.16.241.111","172.16.241.111"],["172.16.242.112","172.16.242.112"]],"time":[[1744866108991,1744866103991],[1744866107975,1744866102975]]}
 ```
 
 ## `dump_json` {#fn-dump_json}

@@ -62,7 +62,7 @@ func TestFuncDQLLog(t *testing.T) {
 	}{
 		{
 			name:   "test",
-			script: "v, ok = dql(\"M::cpu limit 3 slimit 3\"); ;printf(\"%v\\n\",v)",
+			script: "v = dql(\"M::cpu limit 3 slimit 3\"); ;printf(\"%v\\n\",v)",
 			private: map[runtimev2.TaskP]any{
 				PDQLCli: dql.NewDQLOpenAPI(
 					server.URL,
@@ -72,7 +72,7 @@ func TestFuncDQLLog(t *testing.T) {
 		},
 		{
 			name:   "test",
-			script: "v, ok = dql(\"M::cpu limit 3 slimit 3\"); ;printf(\"%v\\n\",v)",
+			script: "v = dql(\"M::cpu limit 3 slimit 3\"); ;printf(\"%v\\n\",v)",
 			private: map[runtimev2.TaskP]any{
 				PDQLCli: dql.NewDQLOpenAPI(
 					svcKodo.URL,

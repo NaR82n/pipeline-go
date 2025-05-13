@@ -38,6 +38,11 @@ var Funcs = map[string]*runtimev2.Fn{
 		Call:      FnDQL,
 		Desc:      FnDQLDesc,
 	},
+	FnDQLSeriesGetDesc.Name: {
+		CallCheck: FnDQLSeriesGetCheck,
+		Call:      FnDQLSeriesGet,
+		Desc:      FnDQLSeriesGetDesc,
+	},
 	FnB64DecDesc.Name: {
 		CallCheck: FnB64DecCheck,
 		Call:      FnB64Dec,

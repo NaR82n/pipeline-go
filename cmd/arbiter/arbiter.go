@@ -82,10 +82,11 @@ func run(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("no program passed")
 	}
 
+	stdout := bytes.NewBuffer([]byte{})
 	if err := arbiter.Run(name, script,
 		arbiter.WithDQLOpenAPI(openapiEndpoint, openapiKey, nil),
 		arbiter.WithFuncs(funcs.Funcs),
-		arbiter.WithStdout(os.Stdout),
+		arbiter.WithStdout(stdout),
 		arbiter.WithTrigger(tr),
 	); err != nil {
 		return err
@@ -94,7 +95,8 @@ func run(cmd *cobra.Command, args []string) error {
 		enc := json.NewEncoder(b)
 		enc.SetIndent("", "  ")
 		_ = enc.Encode(tr.Result())
-		fmt.Fprintf(os.Stdout, "\n=== program run result:\ntrigger output:\n"+b.String()+"\n")
+		fmt.Fprintf(os.Stdout, "\n===\n%s\n=== program run result:\ntrigger output:\n%s\n",
+			stdout.String(), b.String())
 	}
 
 	return nil
