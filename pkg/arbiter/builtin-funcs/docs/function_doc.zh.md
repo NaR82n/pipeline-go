@@ -1344,7 +1344,7 @@ printf("%v", time_now("s"))
 
 ## `trigger` {#fn-trigger}
 
-函数原型： `fn trigger(result: int|float|bool|str, status: str = "", dim_tags: map = {}, related_data: map = {})`
+函数原型： `fn trigger(result: int|float|bool|str, status: str = "", dimension_tags: map = {}, related_data: map = {})`
 
 函数描述： Trigger a security event.
 
@@ -1352,7 +1352,7 @@ printf("%v", time_now("s"))
 
 - `result`: Event check result.
 - `status`: Event status. One of: (`critical`, `high`, `medium`, `low`, `info`).
-- `dim_tags`: Dimension tags.
+- `dimension_tags`: Dimension tags.
 - `related_data`: Related data.
 
 函数示例：
@@ -1362,13 +1362,13 @@ printf("%v", time_now("s"))
 脚本内容:
 
 ```py
-trigger(1, "critical", {"tag_abc": "1"}, {"a": "1", "a1": 2.1})
+trigger(1, "critical", {"tag_abc":"1"}, {"a":"1", "a1":2.1})
 
-trigger(2, dim_tags={"a": "1", "b": "2"}, related_data={"b": {}})
+trigger(result=2, dimension_tags={"a":"1", "b":"2"}, related_data={"b": {}})
 
-trigger(false, related_data={"a": 1, "b": 2}, status="critical")
+trigger(false, related_data={"a":1, "b":2}, status="critical")
 
-trigger("hello",  dim_tags={}, related_data={"a": 1, "b": [1]}, status="critical")
+trigger("hello", dimension_tags={}, related_data={"a":1, "b":[1]}, status="critical")
 ```
 
 标准输出:
