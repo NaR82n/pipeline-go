@@ -53,6 +53,20 @@ func GenDocs(e map[string]*FuncExample, f map[string]*runtimev2.Fn) []*DocVarb {
 	return r
 }
 
+func indentLines(text string) string {
+	var result bytes.Buffer
+	lines := strings.Split(text, "\n")
+	for i, line := range lines {
+		result.WriteString("    ")
+		result.WriteString(line)
+		if i < len(lines)-1 {
+			result.WriteString("\n")
+		}
+	}
+
+	return result.String()
+}
+
 // GenerateDocs used to generate function docs, lang is zh or en
 func GenerateDocs(lang string) (string, error) {
 	var r string
@@ -82,11 +96,9 @@ func GenerateDocs(lang string) (string, error) {
 			enc := json.NewEncoder(b)
 			enc.SetIndent("", "    ")
 			_ = enc.Encode(d)
-			return b.String()
+			return indentLines(b.String())
 		},
-		"endsWithNewline": func(s string) bool {
-			return strings.HasSuffix(s, "\n")
-		},
+		"indentLines": indentLines,
 	})
 
 	if temp, err = temp.Parse(string(docBuf)); err != nil {

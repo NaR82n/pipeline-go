@@ -11,42 +11,50 @@ Function parameters:
 - `li`: The list to append to.
 - `v`: The value to append.
 
+
 Function returns:
 
 - `list`: The list with the appended value.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = [1, 2, 3]
-v = append(v, 4)
-printf("%v", v)
-```
+    ```txt
+    v = [1, 2, 3]
+    v = append(v, 4)
+    printf("%v", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-[1,2,3,4]
-```
-* CASE 1:
+    ```txt
+    [1,2,3,4]
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-v = [1, 2, 3]
-v = append(v, "a", 1.1)
-printf("%v", v)
-```
+    Script content:
 
-Standard output:
+    ```txt
+    v = [1, 2, 3]
+    v = append(v, "a", 1.1)
+    printf("%v", v)
+    
+    ```
 
-```txt
-[1,2,3,"a",1.1]
-```
+    Standard output:
+
+    ```txt
+    [1,2,3,"a",1.1]
+    ```
+
+    
 
 ## `b64dec` {#fn-b64dec}
 
@@ -58,30 +66,35 @@ Function parameters:
 
 - `data`: Data that needs to be base64 decoded.
 
+
 Function returns:
 
 - `str`: The decoded string.
 - `bool`: Whether decoding is successful.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = "aGVsbG8sIHdvcmxk"
-v, ok = b64dec(v)
-if ok {
-	printf("%v", v)
-}
-```
+    ```txt
+    v = "aGVsbG8sIHdvcmxk"
+    v, ok = b64dec(v)
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-hello, world
-```
+    ```txt
+    hello, world
+    ```
+
+    
 
 ## `b64enc` {#fn-b64enc}
 
@@ -93,28 +106,33 @@ Function parameters:
 
 - `data`: Data that needs to be base64 encoded.
 
+
 Function returns:
 
 - `str`: The encoded string.
 - `bool`: Whether encoding is successful.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = "hello, world"
-v = b64enc(v)
-printf("%v", v)
-```
+    ```txt
+    v = "hello, world"
+    v = b64enc(v)
+    printf("%v", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-aGVsbG8sIHdvcmxk
-```
+    ```txt
+    aGVsbG8sIHdvcmxk
+    ```
+
+    
 
 ## `cast` {#fn-cast}
 
@@ -127,40 +145,46 @@ Function parameters:
 - `val`: The value of the type to be converted.
 - `typ`: Target type. One of (`bool`, `int`, `float`, `str`).
 
+
 Function returns:
 
 - `bool|int|float|str`: The value after the conversion.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v1 = "1.1"
-v2 = "1"
-v2_1 = "-1"
-v3 = "true"
+    ```txt
+    v1 = "1.1"
+    v2 = "1"
+    v2_1 = "-1"
+    v3 = "true"
+    
+    printf("%v; %v; %v; %v; %v; %v; %v; %v\n",
+    	cast(v1, "float") + 1,
+    	cast(v2, "int") + 1,
+    	cast(v2_1, "int"),
+    	cast(v3, "bool") + 1,
+    
+    	cast(cast(v3, "bool") - 1, "bool"),
+    	cast(1.1, "str"),
+    	cast(1.1, "int"),
+    	cast(1.1, "bool")
+    )
+    
+    ```
 
-printf("%v; %v; %v; %v; %v; %v; %v; %v\n",
-	cast(v1, "float") + 1,
-	cast(v2, "int") + 1,
-	cast(v2_1, "int"),
-	cast(v3, "bool") + 1,
+    Standard output:
 
-	cast(cast(v3, "bool") - 1, "bool"),
-	cast(1.1, "str"),
-	cast(1.1, "int"),
-	cast(1.1, "bool")
-)
-```
+    ```txt
+    2.1; 2; -1; 2; false; 1.1; 1; true
+    
+    ```
 
-Standard output:
-
-```txt
-2.1; 2; -1; 2; false; 1.1; 1; true
-```
+    
 
 ## `cidr` {#fn-cidr}
 
@@ -173,42 +197,50 @@ Function parameters:
 - `ip`: The ip address
 - `mask`: The CIDR mask
 
+
 Function returns:
 
 - `bool`: Whether the IP is in CIDR block
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-ip = "192.0.2.233"
-if cidr(ip, "192.0.2.1/24") {
-	printf("%s", ip)
-}
-```
-Standard output:
+    ```txt
+    ip = "192.0.2.233"
+    if cidr(ip, "192.0.2.1/24") {
+    	printf("%s", ip)
+    }
+    ```
 
-```txt
-192.0.2.233
-```
-* CASE 1:
+    Standard output:
 
-Script content:
+    ```txt
+    192.0.2.233
+    ```
 
-```py
-ip = "192.0.2.233"
-if cidr(mask="192.0.1.1/24", ip=ip) {
-	printf("%s", ip)
-}
-```
-Standard output:
+    
+* Case 1:
 
-```txt
+    Script content:
 
-```
+    ```txt
+    ip = "192.0.2.233"
+    if cidr(mask="192.0.1.1/24", ip=ip) {
+    	printf("%s", ip)
+    }
+    ```
+
+    Standard output:
+
+    ```txt
+    
+    ```
+
+    
 
 ## `delete` {#fn-delete}
 
@@ -221,41 +253,46 @@ Function parameters:
 - `m`: The map for deleting key
 - `key`: Key need delete from map.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = {
-    "k1": 123,
-    "k2": {
-        "a": 1,
-        "b": 2,
-    },
-    "k3": [{
-        "c": 1.1, 
-        "d":"2.1",
-    }]
-}
-delete(v["k2"], "a")
-delete(v["k3"][0], "d")
-printf("result group 1: %v; %v\n", v["k2"], v["k3"])
+    ```txt
+    v = {
+        "k1": 123,
+        "k2": {
+            "a": 1,
+            "b": 2,
+        },
+        "k3": [{
+            "c": 1.1, 
+            "d":"2.1",
+        }]
+    }
+    delete(v["k2"], "a")
+    delete(v["k3"][0], "d")
+    printf("result group 1: %v; %v\n", v["k2"], v["k3"])
+    
+    v1 = {"a":1}
+    v2 = {"b":1}
+    delete(key="a", m=v1)
+    delete(m=v2, key="b")
+    printf("result group 2: %v; %v\n", v1, v2)
+    
+    ```
 
-v1 = {"a":1}
-v2 = {"b":1}
-delete(key="a", m=v1)
-delete(m=v2, key="b")
-printf("result group 2: %v; %v\n", v1, v2)
-```
+    Standard output:
 
-Standard output:
+    ```txt
+    result group 1: {"b":2}; [{"c":1.1}]
+    result group 2: {}; {}
+    
+    ```
 
-```txt
-result group 1: {"b":2}; [{"c":1.1}]
-result group 2: {}; {}
-```
+    
 
 ## `dql` {#fn-dql}
 
@@ -272,97 +309,102 @@ Function parameters:
 - `slimit`: Query slimit.
 - `time_range`: Query timestamp range, the default value can be modified externally by the script caller.
 
+
 Function returns:
 
 - `map`: Query response.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = dql("M::cpu limit 2 slimit 2")
-v, ok = dump_json(v, "    ")
-if ok {
-	printf("%v", v)
-}
-```
+    ```txt
+    v = dql("M::cpu limit 2 slimit 2")
+    v, ok = dump_json(v, "    ")
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-{
-    "series": [
-        [
-            {
-                "columns": {
-                    "time": 1744866108991,
-                    "total": 7.18078381,
-                    "user": 4.77876106
+    ```txt
+    {
+        "series": [
+            [
+                {
+                    "columns": {
+                        "time": 1744866108991,
+                        "total": 7.18078381,
+                        "user": 4.77876106
+                    },
+                    "tags": {
+                        "cpu": "cpu-total",
+                        "guance_site": "testing",
+                        "host": "172.16.241.111",
+                        "host_ip": "172.16.241.111",
+                        "name": "cpu",
+                        "project": "cloudcare-testing"
+                    }
                 },
-                "tags": {
-                    "cpu": "cpu-total",
-                    "guance_site": "testing",
-                    "host": "172.16.241.111",
-                    "host_ip": "172.16.241.111",
-                    "name": "cpu",
-                    "project": "cloudcare-testing"
+                {
+                    "columns": {
+                        "time": 1744866103991,
+                        "total": 10.37376049,
+                        "user": 7.17009916
+                    },
+                    "tags": {
+                        "cpu": "cpu-total",
+                        "guance_site": "testing",
+                        "host": "172.16.241.111",
+                        "host_ip": "172.16.241.111",
+                        "name": "cpu",
+                        "project": "cloudcare-testing"
+                    }
                 }
-            },
-            {
-                "columns": {
-                    "time": 1744866103991,
-                    "total": 10.37376049,
-                    "user": 7.17009916
+            ],
+            [
+                {
+                    "columns": {
+                        "time": 1744866107975,
+                        "total": 21.75562864,
+                        "user": 5.69187959
+                    },
+                    "tags": {
+                        "cpu": "cpu-total",
+                        "guance_site": "testing",
+                        "host": "172.16.242.112",
+                        "host_ip": "172.16.242.112",
+                        "name": "cpu",
+                        "project": "cloudcare-testing"
+                    }
                 },
-                "tags": {
-                    "cpu": "cpu-total",
-                    "guance_site": "testing",
-                    "host": "172.16.241.111",
-                    "host_ip": "172.16.241.111",
-                    "name": "cpu",
-                    "project": "cloudcare-testing"
+                {
+                    "columns": {
+                        "time": 1744866102975,
+                        "total": 16.59466328,
+                        "user": 5.28589581
+                    },
+                    "tags": {
+                        "cpu": "cpu-total",
+                        "guance_site": "testing",
+                        "host": "172.16.242.112",
+                        "host_ip": "172.16.242.112",
+                        "name": "cpu",
+                        "project": "cloudcare-testing"
+                    }
                 }
-            }
+            ]
         ],
-        [
-            {
-                "columns": {
-                    "time": 1744866107975,
-                    "total": 21.75562864,
-                    "user": 5.69187959
-                },
-                "tags": {
-                    "cpu": "cpu-total",
-                    "guance_site": "testing",
-                    "host": "172.16.242.112",
-                    "host_ip": "172.16.242.112",
-                    "name": "cpu",
-                    "project": "cloudcare-testing"
-                }
-            },
-            {
-                "columns": {
-                    "time": 1744866102975,
-                    "total": 16.59466328,
-                    "user": 5.28589581
-                },
-                "tags": {
-                    "cpu": "cpu-total",
-                    "guance_site": "testing",
-                    "host": "172.16.242.112",
-                    "host_ip": "172.16.242.112",
-                    "name": "cpu",
-                    "project": "cloudcare-testing"
-                }
-            }
-        ]
-    ],
-    "status_code": 200
-}
-```
+        "status_code": 200
+    }
+    ```
+
+    
 
 ## `dql_series_get` {#fn-dql_series_get}
 
@@ -375,30 +417,81 @@ Function parameters:
 - `series`: dql query result
 - `name`: column or tag name
 
+
 Function returns:
 
 - `list`: specified column or tag value for the series
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = dql("M::cpu limit 2 slimit 2") 
+    ```txt
+    v = dql("M::cpu limit 2 slimit 2") 
+    
+    hostLi = dql_series_get(v, "host")
+    time_li = dql_series_get(v, "time")
+    
+    printf("%v", {"host": hostLi, "time": time_li})
+    
+    ```
 
-hostLi = dql_series_get(v, "host")
-time_li = dql_series_get(v, "time")
+    Standard output:
 
-printf("%v", {"host": hostLi, "time": time_li})
-```
+    ```txt
+    {"host":[["172.16.241.111","172.16.241.111"],["172.16.242.112","172.16.242.112"]],"time":[[1744866108991,1744866103991],[1744866107975,1744866102975]]}
+    ```
 
-Standard output:
+    
 
-```txt
-{"host":[["172.16.241.111","172.16.241.111"],["172.16.242.112","172.16.242.112"]],"time":[[1744866108991,1744866103991],[1744866107975,1744866102975]]}
-```
+## `dql_timerange_get` {#fn-dql_timerange_get}
+
+Function prototype: `fn dql_timerange_get() -> list`
+
+Function description: Get the time range of the DQL query, which is passed in by the script caller or defaults to the last 15 minutes.
+
+Function returns:
+
+- `list`: The time range. For example, `[1744214400000, 1744218000000]`, the timestamp precision is milliseconds
+
+
+Function examples:
+
+* Case 0:
+
+    Script content:
+
+    ```txt
+    val = dql_timerange_get()
+    printf("%v", val)
+    ```
+
+    Standard output:
+
+    ```txt
+    [1672531500000,1672532100000]
+    ```
+
+    
+* Case 1:
+
+    Script content:
+
+    ```txt
+    val = dql_timerange_get()
+    printf("%v", val)
+    ```
+
+    Standard output:
+
+    ```txt
+    [1672531200000,1672532100000]
+    ```
+
+    
 
 ## `dump_json` {#fn-dump_json}
 
@@ -411,75 +504,90 @@ Function parameters:
 - `v`: Object to encode.
 - `indent`: Indentation prefix.
 
+
 Function returns:
 
 - `str`: JSON encoding of v.
 - `bool`: Whether decoding is successful.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = {"a": 1, "b": 2.1}
-v, ok = dump_json(v)
-if ok {
-	printf("%v", v)
-}
-```
+    ```txt
+    v = {"a": 1, "b": 2.1}
+    v, ok = dump_json(v)
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-{"a":1,"b":2.1}
-```
-* CASE 1:
+    ```txt
+    {"a":1,"b":2.1}
+    
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-v = {"a": 1, "b": 2.1}
-v, ok = dump_json(v, "  ")
-if ok {
-	printf("%v", v)
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    v = {"a": 1, "b": 2.1}
+    v, ok = dump_json(v, "  ")
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-```txt
-{
-  "a": 1,
-  "b": 2.1
-}
-```
+    Standard output:
+
+    ```txt
+    {
+      "a": 1,
+      "b": 2.1
+    }
+    
+    ```
+
+    
 
 ## `exit` {#fn-exit}
 
 Function prototype: `fn exit()`
 
 Function description: Exit the program
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-printf("1\n")
-printf("2\n")
-exit()
-printf("3\n")
-	
-```
-Standard output:
+    ```txt
+    printf("1\n")
+    printf("2\n")
+    exit()
+    printf("3\n")
+    	
+    ```
 
-```txt
-1
-2
-```
+    Standard output:
+
+    ```txt
+    1
+    2
+    
+    ```
+
+    
 
 ## `format_int` {#fn-format_int}
 
@@ -492,26 +600,31 @@ Function parameters:
 - `val`: The integer to format.
 - `base`: The base to use for formatting. Must be between 2 and 36.
 
+
 Function returns:
 
 - `str`: The formatted string.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = format_int(16, 16)
-printf("%s", v)
-```
+    ```txt
+    v = format_int(16, 16)
+    printf("%s", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-10
-```
+    ```txt
+    10
+    ```
+
+    
 
 ## `geoip` {#fn-geoip}
 
@@ -523,48 +636,56 @@ Function parameters:
 
 - `ip`: IP address.
 
+
 Function returns:
 
 - `map`: IP geographical information.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = geoip("127.0.0.1")
-printf("%v", v)
-```
+    ```txt
+    v = geoip("127.0.0.1")
+    printf("%v", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-{"city":"","country":"","isp":"unknown","province":""}
-```
-* CASE 1:
+    ```txt
+    {"city":"","country":"","isp":"unknown","province":""}
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-ip_addr = "114.114.114.114"
-v, ok = dump_json(geoip(ip_addr), "    ");
-if ok {
-	printf("%v", v)
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    ip_addr = "114.114.114.114"
+    v, ok = dump_json(geoip(ip_addr), "    ");
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-```txt
- {
-    "city": "Ji'an",
-    "country": "CN",
-    "isp": "chinanet",
-    "province": "Jiangxi"
-}
-```
+    Standard output:
+
+    ```txt
+     {
+        "city": "Ji'an",
+        "country": "CN",
+        "isp": "chinanet",
+        "province": "Jiangxi"
+    }
+    ```
+
+    
 
 ## `gjson` {#fn-gjson}
 
@@ -577,86 +698,97 @@ Function parameters:
 - `input`: JSON format string to parse.
 - `json_path`: JSON path.
 
+
 Function returns:
 
 - `bool|int|float|str|list|map`: Parsed result.
 - `bool`: Parsed status.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v='''{
-    "name": {"first": "Tom", "last": "Anderson"},
-    "age": 37,
-    "children": ["Sara","Alex","Jack"],
-    "fav.movie": "Deer Hunter",
-    "friends": [
+    ```txt
+    v='''{
+        "name": {"first": "Tom", "last": "Anderson"},
+        "age": 37,
+        "children": ["Sara","Alex","Jack"],
+        "fav.movie": "Deer Hunter",
+        "friends": [
+            {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb", "tw"]},
+            {"first": "Roger", "last": "Craig", "age": 68, "nets": ["fb", "tw"]},
+            {"first": "Jane", "last": "Murphy", "age": 47, "nets": ["ig", "tw"]}
+        ]
+    }'''
+    age, ok = gjson(v, "age")
+    if ok {
+    	printf("%.0f", age)
+    } else {
+    	printf("not found")
+    }
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    37
+    ```
+
+    
+* Case 1:
+
+    Script content:
+
+    ```txt
+    v='''{
+        "name": {"first": "Tom", "last": "Anderson"},
+        "age": 37,
+        "children": ["Sara","Alex","Jack"],
+        "fav.movie": "Deer Hunter",
+        "friends": [
+            {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb", "tw"]},
+            {"first": "Roger", "last": "Craig", "age": 68, "nets": ["fb", "tw"]},
+            {"first": "Jane", "last": "Murphy", "age": 47, "nets": ["ig", "tw"]}
+        ]
+    }'''
+    name, ok = gjson(v, "name")
+    printf("%v", name)
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    {"first": "Tom", "last": "Anderson"}
+    ```
+
+    
+* Case 2:
+
+    Script content:
+
+    ```txt
+    v='''[
         {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb", "tw"]},
         {"first": "Roger", "last": "Craig", "age": 68, "nets": ["fb", "tw"]},
         {"first": "Jane", "last": "Murphy", "age": 47, "nets": ["ig", "tw"]}
-    ]
-}'''
-age, ok = gjson(v, "age")
-if ok {
-	printf("%.0f", age)
-} else {
-	printf("not found")
-}
-```
+    ]'''
+    net, ok = gjson(v, "0.nets.2")
+    printf("%v", net)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-37
-```
-* CASE 1:
+    ```txt
+    tw
+    ```
 
-Script content:
-
-```py
-v='''{
-    "name": {"first": "Tom", "last": "Anderson"},
-    "age": 37,
-    "children": ["Sara","Alex","Jack"],
-    "fav.movie": "Deer Hunter",
-    "friends": [
-        {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb", "tw"]},
-        {"first": "Roger", "last": "Craig", "age": 68, "nets": ["fb", "tw"]},
-        {"first": "Jane", "last": "Murphy", "age": 47, "nets": ["ig", "tw"]}
-    ]
-}'''
-name, ok = gjson(v, "name")
-printf("%v", name)
-```
-
-Standard output:
-
-```txt
-{"first": "Tom", "last": "Anderson"}
-```
-* CASE 2:
-
-Script content:
-
-```py
-v='''[
-    {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb", "tw"]},
-    {"first": "Roger", "last": "Craig", "age": 68, "nets": ["fb", "tw"]},
-    {"first": "Jane", "last": "Murphy", "age": 47, "nets": ["ig", "tw"]}
-]'''
-net, ok = gjson(v, "0.nets.2")
-printf("%v", net)
-```
-
-Standard output:
-
-```txt
-tw
-```
+    
 
 ## `grok` {#fn-grok}
 
@@ -671,48 +803,53 @@ Function parameters:
 - `extra_patterns`: Additional patterns for parsing patterns.
 - `trim_space`: Whether to trim leading and trailing spaces from the parsed value.
 
+
 Function returns:
 
 - `map`: The parsed result.
 - `bool`: Whether the parsing was successful.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-app_log="2021-01-11T17:43:51.887+0800  DEBUG io  io/io.go:458  post cost 6.87021ms"
+    ```txt
+    app_log="2021-01-11T17:43:51.887+0800  DEBUG io  io/io.go:458  post cost 6.87021ms"
+    
+    # Use built-in patterns, named capture groups, custom patterns, extract fields;
+    # convert the type of the extracted field by specifying the type.
+    v, ok = grok(
+    	app_log,
+    	"%{TIMESTAMP_ISO8601:log_time}\\s+(?P<log_level>[a-zA-Z]+)\\s+%{WORD}\\s+%{log_code_pos_pattern:log_code_pos}.*\\s%{NUMBER:log_cost:float}ms", 
+    	{
+    		"log_code_pos_pattern": "[a-zA-Z0-9/\\.]+:\\d+", 
+    	}
+    )
+    
+    if ok {
+    	v, ok = dump_json(v, "  ")
+    	if ok {
+    		printf("%v", v)
+    	}
+    }
+    
+    ```
 
-# Use built-in patterns, named capture groups, custom patterns, extract fields;
-# convert the type of the extracted field by specifying the type.
-v, ok = grok(
-	app_log,
-	"%{TIMESTAMP_ISO8601:log_time}\\s+(?P<log_level>[a-zA-Z]+)\\s+%{WORD}\\s+%{log_code_pos_pattern:log_code_pos}.*\\s%{NUMBER:log_cost:float}ms", 
-	{
-		"log_code_pos_pattern": "[a-zA-Z0-9/\\.]+:\\d+", 
-	}
-)
+    Standard output:
 
-if ok {
-	v, ok = dump_json(v, "  ")
-	if ok {
-		printf("%v", v)
-	}
-}
-```
+    ```txt
+    {
+      "log_code_pos": "io/io.go:458",
+      "log_cost": 6.87021,
+      "log_level": "DEBUG",
+      "log_time": "2021-01-11T17:43:51.887+0800"
+    }
+    ```
 
-Standard output:
-
-```txt
-{
-  "log_code_pos": "io/io.go:458",
-  "log_cost": 6.87021,
-  "log_level": "DEBUG",
-  "log_time": "2021-01-11T17:43:51.887+0800"
-}
-```
+    
 
 ## `hash` {#fn-hash}
 
@@ -725,77 +862,165 @@ Function parameters:
 - `text`: The string used to calculate the hash.
 - `method`: Hash Algorithms, allowing values including `md5`, `sha1`, `sha256`, `sha512`.
 
+
 Function returns:
 
 - `str`: The hash value.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-printf("%v", hash("abc", "md5"))
-```
+    ```txt
+    printf("%v", hash("abc", "md5"))
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-900150983cd24fb0d6963f7d28e17f72
-```
-* CASE 1:
+    ```txt
+    900150983cd24fb0d6963f7d28e17f72
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-printf("%v", hash("abc", "sha1"))
-```
+    Script content:
 
-Standard output:
+    ```txt
+    printf("%v", hash("abc", "sha1"))
+    
+    ```
 
-```txt
-a9993e364706816aba3e25717850c26c9cd0d89d
-```
-* CASE 2:
+    Standard output:
 
-Script content:
+    ```txt
+    a9993e364706816aba3e25717850c26c9cd0d89d
+    ```
 
-```py
-printf("%v", hash("abc", "sha256"))
-```
+    
+* Case 2:
 
-Standard output:
+    Script content:
 
-```txt
-ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
-```
-* CASE 3:
+    ```txt
+    printf("%v", hash("abc", "sha256"))
+    
+    ```
 
-Script content:
+    Standard output:
 
-```py
-printf("%v", hash("abc", "sha512"))
-```
+    ```txt
+    ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+    ```
 
-Standard output:
+    
+* Case 3:
 
-```txt
-ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f
-```
-* CASE 4:
+    Script content:
 
-Script content:
+    ```txt
+    printf("%v", hash("abc", "sha512"))
+    
+    ```
 
-```py
-printf("%v", hash("abc", "xx"))
-```
+    Standard output:
 
-Standard output:
+    ```txt
+    ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f
+    ```
 
-```txt
+    
+* Case 4:
 
-```
+    Script content:
+
+    ```txt
+    printf("%v", hash("abc", "xx"))
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    
+    ```
+
+    
+
+## `http_request` {#fn-http_request}
+
+Function prototype: `fn http_request(method: str, url: str, body: bool|int|float|str|list|map = nil, headers: map = {}) -> map`
+
+Function description: Used to send http request.
+
+Function parameters:
+
+- `method`: HTTP request method
+- `url`: HTTP request url
+- `body`: HTTP request body
+- `headers`: HTTP request headers
+
+
+Function returns:
+
+- `map`: HTTP response
+
+
+Function examples:
+
+* Case 0:
+
+    Script content:
+
+    ```txt
+    resp = http_request("GET", "http://test-domain/test")
+    delete(resp["headers"], "Date")
+    resp_str, ok = dump_json(resp, "    ")
+    printf("%s", resp_str)
+    ```
+
+    Standard output:
+
+    ```txt
+    {
+        "body": "{\"code\":200, \"message\":\"success\"}",
+        "headers": {
+            "Content-Length": "33",
+            "Content-Type": "application/json"
+        },
+        "status_code": 200
+    }
+    ```
+
+    
+* Case 1:
+
+    Script content:
+
+    ```txt
+    resp = http_request("GET", "http://localhost:80/test")
+    
+    # Usually, access to private IPs will be blocked,
+    # you need to contact the administrator.
+    
+    resp_str, ok = dump_json(resp, "    ")
+    printf("%s", resp_str)
+    ```
+
+    Standard output:
+
+    ```txt
+    {
+        "error": "Get \"http://localhost:80/test\": resolved IP 127.0.0.1 is blocked"
+    }
+    		
+    ```
+
+    
 
 ## `len` {#fn-len}
 
@@ -807,51 +1032,62 @@ Function parameters:
 
 - `val`: The value to get the length of.
 
+
 Function returns:
 
 - `int`: The length of the value.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-printf("%v", len("abc"))
-```
+    ```txt
+    printf("%v", len("abc"))
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-3
-```
-* CASE 1:
+    ```txt
+    3
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-printf("%v", len([1, 2, 3]))
-```
+    Script content:
 
-Standard output:
+    ```txt
+    printf("%v", len([1, 2, 3]))
+    
+    ```
 
-```txt
-3
-```
-* CASE 2:
+    Standard output:
 
-Script content:
+    ```txt
+    3
+    ```
 
-```py
-printf("%v", len({"a": 1, "b": 2, "c": 3}))
-```
+    
+* Case 2:
 
-Standard output:
+    Script content:
 
-```txt
-3
-```
+    ```txt
+    printf("%v", len({"a": 1, "b": 2, "c": 3}))
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    3
+    ```
+
+    
 
 ## `load_json` {#fn-load_json}
 
@@ -863,30 +1099,35 @@ Function parameters:
 
 - `val`: JSON string.
 
+
 Function returns:
 
 - `bool|int|float|str|list|map`: Unmarshal result.
 - `bool`: Unmarshal status.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-jstr = '{"a": 1, "b": 2, "c": 3}'
-v, ok = load_json(jstr)
-if ok {
-	printf("%v", v["b"])
-}
-```
+    ```txt
+    jstr = '{"a": 1, "b": 2, "c": 3}'
+    v, ok = load_json(jstr)
+    if ok {
+    	printf("%v", v["b"])
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-2
-```
+    ```txt
+    2
+    ```
+
+    
 
 ## `lowercase` {#fn-lowercase}
 
@@ -898,25 +1139,30 @@ Function parameters:
 
 - `val`: The string to convert.
 
+
 Function returns:
 
 - `str`: Returns the lowercase value.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-printf("%s", lowercase("ABC"))
-```
+    ```txt
+    printf("%s", lowercase("ABC"))
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-abc
-```
+    ```txt
+    abc
+    ```
+
+    
 
 ## `match` {#fn-match}
 
@@ -930,47 +1176,55 @@ Function parameters:
 - `pattern`: Regular expression pattern.
 - `n`: The number of matches to return. Defaults to 1, -1 for all matches.
 
+
 Function returns:
 
 - `list`: Returns the matched value.
 - `bool`: Returns true if the regular expression matches.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-text="abc def 123 abc def 123"
-v, ok = match(text, "(abc) (?:def) (?P<named_group>123)")
-if ok {
-	printf("%v", v)
-}
-```
+    ```txt
+    text="abc def 123 abc def 123"
+    v, ok = match(text, "(abc) (?:def) (?P<named_group>123)")
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-[["abc def 123","abc","123"]]
-```
-* CASE 1:
+    ```txt
+    [["abc def 123","abc","123"]]
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-text="abc def 123 abc def 123"
-v, ok = match(text, "(abc) (?:def) (?P<named_group>123)", -1)
-if ok {
-	printf("%v", v)
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    text="abc def 123 abc def 123"
+    v, ok = match(text, "(abc) (?:def) (?P<named_group>123)", -1)
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-```txt
-[["abc def 123","abc","123"],["abc def 123","abc","123"]]
-```
+    Standard output:
+
+    ```txt
+    [["abc def 123","abc","123"],["abc def 123","abc","123"]]
+    ```
+
+    
 
 ## `parse_date` {#fn-parse_date}
 
@@ -983,61 +1237,72 @@ Function parameters:
 - `date`: The key to use for parsing.
 - `timezone`: The timezone to use for parsing. If 
 
+
 Function returns:
 
 - `int`: The parsed timestamp in nanoseconds.
 - `bool`: Whether the parsing was successful.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v, ok = parse_date("2021-12-2T11:55:43.123+0800")
-if ok {
-	printf("%v", v)
-}
-```
+    ```txt
+    v, ok = parse_date("2021-12-2T11:55:43.123+0800")
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-1638417343123000000
-```
-* CASE 1:
+    ```txt
+    1638417343123000000
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-v, ok = parse_date("2021-12-2T11:55:43.123", "+8")
-if ok {
-	printf("%v", v)
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    v, ok = parse_date("2021-12-2T11:55:43.123", "+8")
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-```txt
-1638417343123000000
-```
-* CASE 2:
+    Standard output:
 
-Script content:
+    ```txt
+    1638417343123000000
+    ```
 
-```py
-v, ok = parse_date("2021-12-2T11:55:43.123", "Asia/Shanghai")
-if ok {
-	printf("%v", v)
-}
-```
+    
+* Case 2:
 
-Standard output:
+    Script content:
 
-```txt
-1638417343123000000
-```
+    ```txt
+    v, ok = parse_date("2021-12-2T11:55:43.123", "Asia/Shanghai")
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    1638417343123000000
+    ```
+
+    
 
 ## `parse_duration` {#fn-parse_duration}
 
@@ -1049,45 +1314,53 @@ Function parameters:
 
 - `s`: The string to parse.
 
+
 Function returns:
 
 - `int`: The duration in nanoseconds.
 - `bool`: Whether the duration is valid.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v, ok = parse_duration("1s")
-if ok {
-	printf("%v", v)
-}
-```
+    ```txt
+    v, ok = parse_duration("1s")
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-1000000000
-```
-* CASE 1:
+    ```txt
+    1000000000
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-v, ok = parse_duration("100ns")
-if ok {
-	printf("%v", v)
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    v, ok = parse_duration("100ns")
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-```txt
-100
-```
+    Standard output:
+
+    ```txt
+    100
+    ```
+
+    
 
 ## `parse_int` {#fn-parse_int}
 
@@ -1100,45 +1373,53 @@ Function parameters:
 - `val`: The string to parse.
 - `base`: The base to use for parsing. Must be between 2 and 36.
 
+
 Function returns:
 
 - `int`: The parsed integer.
 - `bool`: Whether the parsing was successful.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v, ok = parse_int("123", 10)
-if ok {
-	printf("%v", v)
-}
-```
+    ```txt
+    v, ok = parse_int("123", 10)
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-123
-```
-* CASE 1:
+    ```txt
+    123
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-v, ok = parse_int("123", 16)	
-if ok {
-	printf("%v", v)
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    v, ok = parse_int("123", 16)	
+    if ok {
+    	printf("%v", v)
+    }
+    
+    ```
 
-```txt
-291
-```
+    Standard output:
+
+    ```txt
+    291
+    ```
+
+    
 
 ## `printf` {#fn-printf}
 
@@ -1151,21 +1432,25 @@ Function parameters:
 - `format`: String format.
 - `args`: Argument list, corresponding to the format specifiers in the format string.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-printf("hello, %s", "world")
-```
+    ```txt
+    printf("hello, %s", "world")
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-hello, world
-```
+    ```txt
+    hello, world
+    ```
+
+    
 
 ## `replace` {#fn-replace}
 
@@ -1179,41 +1464,49 @@ Function parameters:
 - `pattern`: Regular expression pattern.
 - `replacement`: Replacement text to use.
 
+
 Function returns:
 
 - `str`: The string with text replaced.
 - `bool`: True if the pattern was found and replaced, false otherwise.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v, ok = replace("abcdef", "bc", "123")
-printf("%s", v)
-```
+    ```txt
+    v, ok = replace("abcdef", "bc", "123")
+    printf("%s", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-a123def
-```
-* CASE 1:
+    ```txt
+    a123def
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-v, ok = replace("bonjour; 你好", "[\u4e00-\u9fa5]+", "hello")
-printf("%s", v)
-```
+    Script content:
 
-Standard output:
+    ```txt
+    v, ok = replace("bonjour; 你好", "[\u4e00-\u9fa5]+", "hello")
+    printf("%s", v)
+    
+    ```
 
-```txt
-bonjour; hello
-```
+    Standard output:
+
+    ```txt
+    bonjour; hello
+    ```
+
+    
 
 ## `sql_cover` {#fn-sql_cover}
 
@@ -1225,61 +1518,72 @@ Function parameters:
 
 - `val`: The sql to obfuscate.
 
+
 Function returns:
 
 - `str`: The obfuscated sql.
 - `bool`: The obfuscate status.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v, ok = sql_cover("select abc from def where x > 3 and y < 5")
-if ok {
-	printf("%s",v)
-}
-```
+    ```txt
+    v, ok = sql_cover("select abc from def where x > 3 and y < 5")
+    if ok {
+    	printf("%s",v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-select abc from def where x > ? and y < ?
-```
-* CASE 1:
+    ```txt
+    select abc from def where x > ? and y < ?
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-v, ok = sql_cover("SELECT $func$INSERT INTO table VALUES ('a', 1, 2)$func$ FROM users")
-if ok {
-	printf("%s",v)
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    v, ok = sql_cover("SELECT $func$INSERT INTO table VALUES ('a', 1, 2)$func$ FROM users")
+    if ok {
+    	printf("%s",v)
+    }
+    
+    ```
 
-```txt
-SELECT ? FROM users
-```
-* CASE 2:
+    Standard output:
 
-Script content:
+    ```txt
+    SELECT ? FROM users
+    ```
 
-```py
-v, ok = sql_cover("SELECT ('/uffd')")
-if ok {
-	printf("%s",v)
-}
-```
+    
+* Case 2:
 
-Standard output:
+    Script content:
 
-```txt
-SELECT ( ? )
-```
+    ```txt
+    v, ok = sql_cover("SELECT ('/uffd')")
+    if ok {
+    	printf("%s",v)
+    }
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    SELECT ( ? )
+    ```
+
+    
 
 ## `str_join` {#fn-str_join}
 
@@ -1292,26 +1596,31 @@ Function parameters:
 - `li`: List to be joined with separator. The elements type need to be string, if not, they will be ignored.
 - `sep`: Separator to be used between elements.
 
+
 Function returns:
 
 - `str`: Joined string.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = str_join(["a", "b", "c"], "##")
-printf("%s", v)
-```
+    ```txt
+    v = str_join(["a", "b", "c"], "##")
+    printf("%s", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-a##b##c
-```
+    ```txt
+    a##b##c
+    ```
+
+    
 
 ## `strfmt` {#fn-strfmt}
 
@@ -1324,26 +1633,31 @@ Function parameters:
 - `format`: String format.
 - `args`: Parameters to replace placeholders.
 
+
 Function returns:
 
 - `str`: String.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = strfmt("abc %s def %d", "123", 456)
-printf("%s", v)
-```
+    ```txt
+    v = strfmt("abc %s def %d", "123", 456)
+    printf("%s", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-abc 123 def 456
-```
+    ```txt
+    abc 123 def 456
+    ```
+
+    
 
 ## `time_now` {#fn-time_now}
 
@@ -1355,25 +1669,30 @@ Function parameters:
 
 - `precision`: The precision of the timestamp. Supported values: `ns`, `us`, `ms`, `s`.
 
+
 Function returns:
 
 - `int`: Returns the current timestamp.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-printf("%v", time_now("s"))
-```
+    ```txt
+    printf("%v", time_now("s"))
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-1745823860
-```
+    ```txt
+    1745823860
+    ```
+
+    
 
 ## `trigger` {#fn-trigger}
 
@@ -1388,75 +1707,79 @@ Function parameters:
 - `dimension_tags`: Dimension tags.
 - `related_data`: Related data.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-trigger(1, "critical", {"tag_abc":"1"}, {"a":"1", "a1":2.1})
+    ```txt
+    trigger(1, "critical", {"tag_abc":"1"}, {"a":"1", "a1":2.1})
+    
+    trigger(result=2, dimension_tags={"a":"1", "b":"2"}, related_data={"b": {}})
+    
+    trigger(false, related_data={"a":1, "b":2}, status="critical")
+    
+    trigger("hello", dimension_tags={}, related_data={"a":1, "b":[1]}, status="critical")
+    
+    ```
 
-trigger(result=2, dimension_tags={"a":"1", "b":"2"}, related_data={"b": {}})
+    Standard output:
 
-trigger(false, related_data={"a":1, "b":2}, status="critical")
+    ```txt
+    
+    ```
 
-trigger("hello", dimension_tags={}, related_data={"a":1, "b":[1]}, status="critical")
-```
-
-Standard output:
-
-```txt
-
-```
-Trigger output:
-```json
-[
-    {
-        "result": 1,
-        "status": "critical",
-        "dimension_tags": {
-            "tag_abc": "1"
+    
+    Trigger output:
+    ```json
+    [
+        {
+            "result": 1,
+            "status": "critical",
+            "dimension_tags": {
+                "tag_abc": "1"
+            },
+            "related_data": {
+                "a": "1",
+                "a1": 2.1
+            }
         },
-        "related_data": {
-            "a": "1",
-            "a1": 2.1
-        }
-    },
-    {
-        "result": 2,
-        "status": "",
-        "dimension_tags": {
-            "a": "1",
-            "b": "2"
+        {
+            "result": 2,
+            "status": "",
+            "dimension_tags": {
+                "a": "1",
+                "b": "2"
+            },
+            "related_data": {
+                "b": {}
+            }
         },
-        "related_data": {
-            "b": {}
+        {
+            "result": false,
+            "status": "critical",
+            "dimension_tags": {},
+            "related_data": {
+                "a": 1,
+                "b": 2
+            }
+        },
+        {
+            "result": "hello",
+            "status": "critical",
+            "dimension_tags": {},
+            "related_data": {
+                "a": 1,
+                "b": [
+                    1
+                ]
+            }
         }
-    },
-    {
-        "result": false,
-        "status": "critical",
-        "dimension_tags": {},
-        "related_data": {
-            "a": 1,
-            "b": 2
-        }
-    },
-    {
-        "result": "hello",
-        "status": "critical",
-        "dimension_tags": {},
-        "related_data": {
-            "a": 1,
-            "b": [
-                1
-            ]
-        }
-    }
-]
-
-```
+    ]
+    
+    ```
 
 ## `trim` {#fn-trim}
 
@@ -1470,64 +1793,78 @@ Function parameters:
 - `cutset`: Characters to remove from the beginning and end of the string. If not specified, whitespace is removed.
 - `side`: The side to trim from. If value is 0, trim from both sides. If value is 1, trim from the left side. If value is 2, trim from the right side.
 
+
 Function returns:
 
 - `str`: The trimmed string.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-printf("%s", trim(" abcdef "))
-```
+    ```txt
+    printf("%s", trim(" abcdef "))
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-abcdef
-```
-* CASE 1:
+    ```txt
+    abcdef
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-printf("%s", trim("#-abcdef-#", "-#", 2))
-```
+    Script content:
 
-Standard output:
+    ```txt
+    printf("%s", trim("#-abcdef-#", "-#", 2))
+    
+    ```
 
-```txt
-#-abcdef
-```
-* CASE 2:
+    Standard output:
 
-Script content:
+    ```txt
+    #-abcdef
+    ```
 
-```py
-printf("%s", trim("#-abcdef-#", "-#", 1))
-```
+    
+* Case 2:
 
-Standard output:
+    Script content:
 
-```txt
-abcdef-#
-```
-* CASE 3:
+    ```txt
+    printf("%s", trim("#-abcdef-#", "-#", 1))
+    
+    ```
 
-Script content:
+    Standard output:
 
-```py
-printf("%s", trim("#-abcdef-#", side=0, cutset="-#"))
-```
+    ```txt
+    abcdef-#
+    ```
 
-Standard output:
+    
+* Case 3:
 
-```txt
-abcdef
-```
+    Script content:
+
+    ```txt
+    printf("%s", trim("#-abcdef-#", side=0, cutset="-#"))
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    abcdef
+    ```
+
+    
 
 ## `uppercase` {#fn-uppercase}
 
@@ -1539,25 +1876,30 @@ Function parameters:
 
 - `val`: The string to convert.
 
+
 Function returns:
 
 - `str`: Returns the uppercase value.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-printf("%s", uppercase("abc"))
-```
+    ```txt
+    printf("%s", uppercase("abc"))
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-ABC
-```
+    ```txt
+    ABC
+    ```
+
+    
 
 ## `url_decode` {#fn-url_decode}
 
@@ -1569,29 +1911,34 @@ Function parameters:
 
 - `val`: The URL-encoded string to decode.
 
+
 Function returns:
 
 - `str`: The decoded string.
 - `bool`: The decoding status.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v, ok = url_decode("https:%2F%2Fkubernetes.io%2Fdocs%2Freference%2Faccess-authn-authz%2Fbootstrap-tokens%2F")
-if ok {
-	printf("%s", v)
-}
-```
+    ```txt
+    v, ok = url_decode("https:%2F%2Fkubernetes.io%2Fdocs%2Freference%2Faccess-authn-authz%2Fbootstrap-tokens%2F")
+    if ok {
+    	printf("%s", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/
-```
+    ```txt
+    https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/
+    ```
+
+    
 
 ## `url_parse` {#fn-url_parse}
 
@@ -1603,42 +1950,47 @@ Function parameters:
 
 - `url`: The URL to parse.
 
+
 Function returns:
 
 - `map`: Returns the parsed URL as a map.
 - `bool`: Returns true if the URL is valid.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v, ok = url_parse("http://www.example.com:8080/path/to/file?query=abc")
-if ok {
-	v, ok = dump_json(v, "  ")
-	if ok {
-		printf("%v", v)
-	}
-}
-```
+    ```txt
+    v, ok = url_parse("http://www.example.com:8080/path/to/file?query=abc")
+    if ok {
+    	v, ok = dump_json(v, "  ")
+    	if ok {
+    		printf("%v", v)
+    	}
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-{
-  "host": "www.example.com:8080",
-  "params": {
-    "query": [
-      "abc"
-    ]
-  },
-  "path": "/path/to/file",
-  "port": "8080",
-  "scheme": "http"
-}
-```
+    ```txt
+    {
+      "host": "www.example.com:8080",
+      "params": {
+        "query": [
+          "abc"
+        ]
+      },
+      "path": "/path/to/file",
+      "port": "8080",
+      "scheme": "http"
+    }
+    ```
+
+    
 
 ## `user_agent` {#fn-user_agent}
 
@@ -1650,26 +2002,31 @@ Function parameters:
 
 - `header`: The User-Agent header to parse.
 
+
 Function returns:
 
 - `map`: Returns the parsed User-Agent header as a map.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36")
-printf("%s", v)
-```
+    ```txt
+    v = user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36")
+    printf("%s", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-{"browser":"Chrome","browserVer":"96.0.4664.110","engine":"AppleWebKit","engineVer":"537.36","isBot":false,"isMobile":false,"os":"Intel Mac OS X 10_15_7","ua":"Macintosh"}
-```
+    ```txt
+    {"browser":"Chrome","browserVer":"96.0.4664.110","engine":"AppleWebKit","engineVer":"537.36","isBot":false,"isMobile":false,"os":"Intel Mac OS X 10_15_7","ua":"Macintosh"}
+    ```
+
+    
 
 ## `valid_json` {#fn-valid_json}
 
@@ -1681,60 +2038,71 @@ Function parameters:
 
 - `val`: The value to check.
 
+
 Function returns:
 
 - `bool`: Returns true if the value is a valid JSON.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-ok = valid_json("{\"a\": 1, \"b\": 2}")
-if ok {
-	printf("true")
-}
-```
+    ```txt
+    ok = valid_json("{\"a\": 1, \"b\": 2}")
+    if ok {
+    	printf("true")
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-true
-```
-* CASE 1:
+    ```txt
+    true
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-ok = valid_json("1.1")
-if ok {
-	printf("true")
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    ok = valid_json("1.1")
+    if ok {
+    	printf("true")
+    }
+    
+    ```
 
-```txt
-true
-```
-* CASE 2:
+    Standard output:
 
-Script content:
+    ```txt
+    true
+    ```
 
-```py
-ok = valid_json("str_abc_def")
-if !ok {
-	printf("false")
-}
-```
+    
+* Case 2:
 
-Standard output:
+    Script content:
 
-```txt
-false
-```
+    ```txt
+    ok = valid_json("str_abc_def")
+    if !ok {
+    	printf("false")
+    }
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    false
+    ```
+
+    
 
 ## `value_type` {#fn-value_type}
 
@@ -1746,52 +2114,63 @@ Function parameters:
 
 - `val`: The value to get the type of.
 
+
 Function returns:
 
 - `str`: Returns the type of the value. One of (`bool`, `int`, `float`, `str`, `list`, `map`, `nil`). If the value and the type is nil, returns `nil`.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-v = value_type(1)
-printf("%s", v)
-```
+    ```txt
+    v = value_type(1)
+    printf("%s", v)
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-int
-```
-* CASE 1:
+    ```txt
+    int
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-printf("%s", value_type("abc"))
-```
+    Script content:
 
-Standard output:
+    ```txt
+    printf("%s", value_type("abc"))
+    
+    ```
 
-```txt
-str
-```
-* CASE 2:
+    Standard output:
 
-Script content:
+    ```txt
+    str
+    ```
 
-```py
-printf("%s", value_type(true))
-```
+    
+* Case 2:
 
-Standard output:
+    Script content:
 
-```txt
-bool
-```
+    ```txt
+    printf("%s", value_type(true))
+    
+    ```
+
+    Standard output:
+
+    ```txt
+    bool
+    ```
+
+    
 
 ## `xml_query` {#fn-xml_query}
 
@@ -1804,56 +2183,63 @@ Function parameters:
 - `input`: The XML input to get the value of.
 - `xpath`: The XPath expression to get the value of.
 
+
 Function returns:
 
 - `str`: Returns the value of the XML field.
 - `bool`: Returns true if the field exists, false otherwise.
 
+
 Function examples:
 
-* CASE 0:
+* Case 0:
 
-Script content:
+    Script content:
 
-```py
-xml_data='''
-<OrderEvent actionCode = "5">
- <OrderNumber>ORD12345</OrderNumber>
- <VendorNumber>V11111</VendorNumber>
- </OrderEvent>
-'''
-v, ok = xml_query(xml_data, "/OrderEvent/OrderNumber/text()")
-if ok {
-	printf("%s", v)
-}
-```
+    ```txt
+    xml_data='''
+    <OrderEvent actionCode = "5">
+     <OrderNumber>ORD12345</OrderNumber>
+     <VendorNumber>V11111</VendorNumber>
+     </OrderEvent>
+    '''
+    v, ok = xml_query(xml_data, "/OrderEvent/OrderNumber/text()")
+    if ok {
+    	printf("%s", v)
+    }
+    
+    ```
 
-Standard output:
+    Standard output:
 
-```txt
-ORD12345
-```
-* CASE 1:
+    ```txt
+    ORD12345
+    ```
 
-Script content:
+    
+* Case 1:
 
-```py
-xml_data='''
-<OrderEvent actionCode = "5">
- <OrderNumber>ORD12345</OrderNumber>
- <VendorNumber>V11111</VendorNumber>
- </OrderEvent>
-'''
-v, ok = xml_query(xml_data, "/OrderEvent/@actionCode")
-if ok {
-	printf("%s", v)
-}
-```
+    Script content:
 
-Standard output:
+    ```txt
+    xml_data='''
+    <OrderEvent actionCode = "5">
+     <OrderNumber>ORD12345</OrderNumber>
+     <VendorNumber>V11111</VendorNumber>
+     </OrderEvent>
+    '''
+    v, ok = xml_query(xml_data, "/OrderEvent/@actionCode")
+    if ok {
+    	printf("%s", v)
+    }
+    
+    ```
 
-```txt
-5
-```
+    Standard output:
 
+    ```txt
+    5
+    ```
+
+    
 

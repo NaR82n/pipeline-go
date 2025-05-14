@@ -8,6 +8,7 @@ import (
 
 	"github.com/GuanceCloud/pipeline-go/pkg/arbiter"
 	funcs "github.com/GuanceCloud/pipeline-go/pkg/arbiter/builtin-funcs"
+	"github.com/GuanceCloud/pipeline-go/pkg/arbiter/request"
 	"github.com/GuanceCloud/pipeline-go/pkg/arbiter/trigger"
 	"github.com/GuanceCloud/platypus/pkg/engine/runtimev2"
 	"github.com/spf13/cobra"
@@ -88,6 +89,7 @@ func run(cmd *cobra.Command, args []string) error {
 		arbiter.WithFuncs(funcs.Funcs),
 		arbiter.WithStdout(stdout),
 		arbiter.WithTrigger(tr),
+		arbiter.WithHTTPClient(request.NewHTTPClient(0)),
 	); err != nil {
 		return err
 	} else {
