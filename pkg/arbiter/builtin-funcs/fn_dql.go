@@ -80,7 +80,7 @@ func FnDQL(ctx *runtimev2.Task, expr *ast.CallExpr) *errchain.PlError {
 			"missing context data named %s", PDQLCli), expr.NamePos)
 	}
 	dqlCli, ok := v.(dql.DQL)
-	if !ok {
+	if !ok || dqlCli == nil {
 		return runtimev2.NewRunError(ctx, fmt.Sprintf("context data %s type is expected", PDQLCli), expr.NamePos)
 	}
 	if dqlCli == nil {

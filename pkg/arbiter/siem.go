@@ -5,6 +5,7 @@ import (
 
 	funcs "github.com/GuanceCloud/pipeline-go/pkg/arbiter/builtin-funcs"
 	"github.com/GuanceCloud/pipeline-go/pkg/arbiter/dql"
+	"github.com/GuanceCloud/pipeline-go/pkg/arbiter/request"
 	"github.com/GuanceCloud/pipeline-go/pkg/arbiter/trigger"
 	"github.com/GuanceCloud/platypus/pkg/engine"
 	"github.com/GuanceCloud/platypus/pkg/engine/runtimev2"
@@ -48,6 +49,12 @@ func WithStdout(writer io.Writer) Opt {
 func WithTrigger(tr *trigger.Trigger) Opt {
 	return func(c *Config) {
 		c.Private[funcs.PTrigger] = tr
+	}
+}
+
+func WithHTTPClient(client *request.HTTPClient) Opt {
+	return func(c *Config) {
+		c.Private[funcs.PHTTPClient] = client
 	}
 }
 

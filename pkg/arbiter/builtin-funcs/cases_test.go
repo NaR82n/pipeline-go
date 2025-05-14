@@ -59,6 +59,7 @@ func runCase(t *testing.T, c ProgCase, private ...map[runtimev2.TaskP]any) {
 	enc.SetIndent("", "  ")
 	_ = enc.Encode(tr.Result())
 	t.Log(trBuf.String())
+
 	if c.jsonout {
 		var v1 any
 		var v2 any

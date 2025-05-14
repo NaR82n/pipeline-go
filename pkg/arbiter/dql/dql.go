@@ -2,7 +2,6 @@ package dql
 
 import (
 	"bytes"
-	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -20,31 +19,24 @@ const (
 	KodoPath    = "/v1/query"
 )
 
-func dialCtx(dialer *net.Dialer) func(context.Context, string, string) (net.Conn, error) {
-	return dialer.DialContext
-}
-
 var client = &http.Client{
 	Transport: &http.Transport{
-		Proxy: http.ProxyFromEnvironment,
-		DialContext: dialCtx(&net.Dialer{
+		DialContext: ((&net.Dialer{
 			Timeout:   30 * time.Second,
 			KeepAlive: 30 * time.Second,
-		}),
-
-		ForceAttemptHTTP2: true,
-		MaxIdleConns:      100,
-		MaxConnsPerHost:   19200,
-
+		}).DialContext),
+		MaxIdleConns:          100,
 		IdleConnTimeout:       90 * time.Second,
 		TLSHandshakeTimeout:   10 * time.Second,
 		ExpectContinueTimeout: 1 * time.Second,
 	},
+	Timeout: time.Minute * 5,
 }
 
 type DQL interface {
 	Query(q, qTyp string, limit, offset, slimit int64, timeRange []any) (map[string]any, error)
 	GetSeries(resp map[string]any) []any // []points
+	TimeRange() []int64
 }
 
 var (
@@ -60,20 +52,20 @@ type DQLCliOpenAPI struct {
 	APIKey string
 	WSUUID string
 
-	TimeRange []int64
+	Timerange []int64
 }
 
 type DQLCliKodo struct {
 	URL       string
 	WSUUID    string
-	TimeRange []int64
+	Timerange []int64
 }
 
 func NewDQLKodo(url, uuid string, timeRange []int64) *DQLCliKodo {
 	return &DQLCliKodo{
 		URL:       url,
 		WSUUID:    uuid,
-		TimeRange: timeRange,
+		Timerange: timeRange,
 	}
 }
 
@@ -84,8 +76,22 @@ func NewDQLOpenAPI(endpoint, path, key string, timeRange []int64) *DQLCliOpenAPI
 		Path:      path,
 		URL:       u,
 		APIKey:    key,
-		TimeRange: timeRange,
+		Timerange: timeRange,
 	}
+}
+
+func (cli *DQLCliKodo) TimeRange() []int64 {
+	if len(cli.Timerange) == 2 {
+		return append([]int64{}, cli.Timerange...)
+	}
+	return nil
+}
+
+func (cli *DQLCliOpenAPI) TimeRange() []int64 {
+	if len(cli.Timerange) == 2 {
+		return append([]int64{}, cli.Timerange...)
+	}
+	return nil
 }
 
 func (cli *DQLCliKodo) Query(q, qTyp string, limit, offset, slimit int64, timeRange []any) (map[string]any, error) {
@@ -95,25 +101,25 @@ func (cli *DQLCliKodo) Query(q, qTyp string, limit, offset, slimit int64, timeRa
 	}
 
 	query := map[string]any{
-		"query":                  q,
-		"qtype":                  qTyp,
-		"disable_sampling":       true,
-		"limit":                  limit,
-		"offset":                 offset,
-		"slimit":                 slimit,
-		"disable_multiple_field": false,
+		"query":                         q,
+		"qtype":                         qTyp,
+		"disable_sampling":              true,
+		"limit":                         limit,
+		"offset":                        offset,
+		"slimit":                        slimit,
+		"disable_multiple_field":        false,
+		"disable_streaming_aggregation": true,
 	}
 
 	if len(timeRange) == 2 {
 		query["time_range"] = timeRange
-	} else if len(cli.TimeRange) == 2 {
-		query["time_range"] = cli.TimeRange
+	} else if len(cli.Timerange) == 2 {
+		query["time_range"] = cli.Timerange
 	}
 
 	b, err := json.Marshal(map[string]any{
 		"workspace_uuid": cli.WSUUID,
-		"query_source":   "arbiter",
-		// "token":          cli.WSToken,
+		// "query_source":   "arbiter",
 		"queries": []map[string]any{
 			query,
 		},
@@ -127,6 +133,7 @@ func (cli *DQLCliKodo) Query(q, qTyp string, limit, offset, slimit int64, timeRa
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Referer", "arbiter")
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -186,8 +193,8 @@ func (cli *DQLCliOpenAPI) Query(q, qTyp string, limit, offset, slimit int64, tim
 
 	if len(timeRange) == 2 {
 		query["timeRange"] = timeRange
-	} else if len(cli.TimeRange) == 2 {
-		query["timeRange"] = cli.TimeRange
+	} else if len(cli.Timerange) == 2 {
+		query["timeRange"] = cli.Timerange
 	}
 
 	b, err := json.Marshal(map[string]any{
@@ -213,6 +220,7 @@ func (cli *DQLCliOpenAPI) Query(q, qTyp string, limit, offset, slimit int64, tim
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	result := map[string]any{}
 

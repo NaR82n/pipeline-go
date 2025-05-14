@@ -1,6 +1,7 @@
 package funcs
 
 import (
+	"github.com/GuanceCloud/pipeline-go/pkg/arbiter/request"
 	"github.com/GuanceCloud/pipeline-go/pkg/arbiter/trigger"
 )
 
@@ -8,6 +9,7 @@ type ProgCase struct {
 	Name          string
 	Script        string
 	Stdout        string
+	privateData   map[string]any
 	jsonout       bool
 	TriggerResult []trigger.Data
 }
@@ -259,6 +261,33 @@ if ok {
     ],
     "status_code": 200
 }`},
+	},
+}
+
+var _ = AddExps(cDQLTimerangeGet)
+var cDQLTimerangeGet = &FuncExample{
+	FnName: FnDQLTimerangeGetDesc.Name,
+	Progs: []ProgCase{
+		{
+			Name: "dql_timerange_get",
+			Script: `val = dql_timerange_get()
+printf("%v", val)`,
+			jsonout: true,
+			Stdout:  `[1672531500000,1672532100000]`,
+			privateData: map[string]any{
+				"time_range": []int64{
+					1672531500000,
+					1672532100000,
+				},
+			},
+		},
+		{
+			Name: "dql_timerange_get",
+			Script: `val = dql_timerange_get()
+printf("%v", val)`,
+			jsonout: true,
+			Stdout:  `[1672531200000,1672532100000]`,
+		},
 	},
 }
 
@@ -518,6 +547,52 @@ var cHash = &FuncExample{
 			Script: `printf("%v", hash("abc", "xx"))
 `,
 			Stdout: "",
+		},
+	},
+}
+
+var _ = AddExps(cHTTPRequest)
+var cHTTPRequest = &FuncExample{
+	FnName: FnHTTPRequestDesc.Name,
+	Progs: []ProgCase{
+		{
+			Name: "http_request",
+			Script: `resp = http_request("GET", "http://test-domain/test")
+delete(resp["headers"], "Date")
+resp_str, ok = dump_json(resp, "    ")
+printf("%s", resp_str)`,
+			Stdout: `{
+    "body": "{\"code\":200, \"message\":\"success\"}",
+    "headers": {
+        "Content-Length": "33",
+        "Content-Type": "application/json"
+    },
+    "status_code": 200
+}`,
+			jsonout: true,
+			privateData: map[string]any{
+				"replace": "http://test-domain/test",
+			},
+		},
+
+		{
+			Name: "http_request",
+			Script: `resp = http_request("GET", "http://localhost:80/test")
+
+# Usually, access to private IPs will be blocked,
+# you need to contact the administrator.
+
+resp_str, ok = dump_json(resp, "    ")
+printf("%s", resp_str)`,
+			Stdout: `{
+    "error": "Get \"http://localhost:80/test\": resolved IP 127.0.0.1 is blocked"
+}
+		`,
+			jsonout: true,
+			privateData: map[string]any{
+				"replace":      "http://localhost:80/test",
+				"blockedCIDRs": request.PrivateCIDRs(),
+			},
 		},
 	},
 }

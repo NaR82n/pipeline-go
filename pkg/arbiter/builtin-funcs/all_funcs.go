@@ -43,6 +43,11 @@ var Funcs = map[string]*runtimev2.Fn{
 		Call:      FnDQLSeriesGet,
 		Desc:      FnDQLSeriesGetDesc,
 	},
+	FnDQLTimerangeGetDesc.Name: {
+		CallCheck: FnDQLTimerangeGetCheck,
+		Call:      FnDQLTimerangeGet,
+		Desc:      FnDQLTimerangeGetDesc,
+	},
 	FnB64DecDesc.Name: {
 		CallCheck: FnB64DecCheck,
 		Call:      FnB64Dec,
@@ -77,6 +82,11 @@ var Funcs = map[string]*runtimev2.Fn{
 		CallCheck: FnHashCheck,
 		Call:      FnHash,
 		Desc:      FnHashDesc,
+	},
+	FnHTTPRequestDesc.Name: {
+		CallCheck: FnHTTPRequestChecking,
+		Call:      FnHTTPRequest,
+		Desc:      FnHTTPRequestDesc,
 	},
 	FnLenDesc.Name: {
 		CallCheck: FnLenCheck,
