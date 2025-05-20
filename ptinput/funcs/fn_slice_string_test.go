@@ -32,11 +32,11 @@ func TestSliceString(t *testing.T) {
 		{
 			name: "normal1",
 			pl: `
-			substring = slice_string("15384073392",0,3)
+			substring = slice_string("█汉字15384073392",0,5)
 			pt_kvs_set("result", substring)
 			`,
 			keyName: "result",
-			expect:  "153",
+			expect:  "█汉字15",
 			fail:    false,
 		},
 		{
