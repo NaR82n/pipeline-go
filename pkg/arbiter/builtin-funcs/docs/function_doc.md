@@ -296,7 +296,7 @@ Function examples:
 
 ## `dql` {#fn-dql}
 
-Function prototype: `fn dql(query: str, qtype: str = "dql", limit: int = 2000, offset: int = 0, slimit: int = 2000, time_range: list = []) -> map`
+Function prototype: `fn dql(query: str, qtype: str = "dql", limit: int = 10000, offset: int = 0, slimit: int = 0, time_range: list = []) -> map`
 
 Function description: Query data from the GuanceCloud using dql or promql.
 

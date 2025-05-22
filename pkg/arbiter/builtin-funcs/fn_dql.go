@@ -31,7 +31,7 @@ var FnDQLDesc = runtimev2.FnDesc{
 			Name: "limit",
 			Desc: "Query limit.",
 			Val: func() any {
-				return int64(2000)
+				return int64(10000)
 			},
 			Typs: []ast.DType{ast.Int},
 		},
@@ -47,7 +47,7 @@ var FnDQLDesc = runtimev2.FnDesc{
 			Name: "slimit",
 			Desc: "Query slimit.",
 			Val: func() any {
-				return int64(2000)
+				return int64(0)
 			},
 			Typs: []ast.DType{ast.Int},
 		},
@@ -83,10 +83,6 @@ func FnDQL(ctx *runtimev2.Task, expr *ast.CallExpr) *errchain.PlError {
 	if !ok || dqlCli == nil {
 		return runtimev2.NewRunError(ctx, fmt.Sprintf("context data %s type is expected", PDQLCli), expr.NamePos)
 	}
-	if dqlCli == nil {
-		return runtimev2.NewRunError(ctx, fmt.Sprintf(
-			"context data %s value is nil", PDQLCli), expr.NamePos)
-	}
 
 	query, err := runtimev2.GetParamString(ctx, expr, FnDQLDesc.Params, 0)
 	if err != nil {
@@ -118,7 +114,7 @@ func FnDQL(ctx *runtimev2.Task, expr *ast.CallExpr) *errchain.PlError {
 		return err
 	}
 
-	r, errQ := dqlCli.Query(query, qtype, limit, offset, slimit, timeRange)
+	r, errQ := dqlCli.Query(expr.NamePos, query, qtype, limit, offset, slimit, timeRange)
 	if errQ != nil {
 		return runtimev2.NewRunError(ctx, err.Error(), expr.NamePos)
 	} else {
