@@ -114,8 +114,7 @@ func FnDQL(ctx *runtimev2.Task, expr *ast.CallExpr) *errchain.PlError {
 		return err
 	}
 
-	r, errQ := dqlCli.Query(expr.NamePos, query, qtype, limit, offset, slimit, timeRange)
-	if errQ != nil {
+	if r, err := dqlCli.Query(expr.NamePos, query, qtype, limit, offset, slimit, timeRange); err != nil {
 		return runtimev2.NewRunError(ctx, err.Error(), expr.NamePos)
 	} else {
 		ctx.Regs.ReturnAppend(
