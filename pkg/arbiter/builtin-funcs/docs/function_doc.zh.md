@@ -134,6 +134,62 @@
 
     
 
+## `call_func` {#fn-call_func}
+
+函数原型： `fn call_func(name: str, kwargs: map = {}) -> map`
+
+函数描述： Calling remote functions on the Function platform
+
+函数参数：
+
+- `name`: Remote function name.
+- `kwargs`: Parameter map, corresponding to **kwargs in Python.
+
+
+函数返回值：
+
+- `map`: 
+
+
+函数示例：
+
+* 示例 0:
+
+    脚本内容：
+
+    ```txt
+    result = call_func("echo", {
+        "arg_1": "1",
+    	"arg_2": [12,3],
+    	"key3": "true"
+    })
+    printf("%v", result)
+    ```
+
+    标准输出：
+
+    ```txt
+    {"error":"","message":"","ok":true,"reason":"","result":{"arg_1":"1","arg_2":[12,3],"kwargs":{"key3":"true"}}}
+    ```
+
+    
+* 示例 1:
+
+    脚本内容：
+
+    ```txt
+    result = call_func("echo", {"arg_2": [12,3]})
+    printf("%v", result)
+    ```
+
+    标准输出：
+
+    ```txt
+    {"detail":{"exeception":"TypeError(\"echo() missing 1 required positional argument: 'arg_1'\")"},"error":"call function failed, api status code 599","message":"Func task failed","ok":false,"reason":"EFuncFailed"}
+    ```
+
+    
+
 ## `cast` {#fn-cast}
 
 函数原型： `fn cast(val: bool|int|float|str, typ: str) -> bool|int|float|str`

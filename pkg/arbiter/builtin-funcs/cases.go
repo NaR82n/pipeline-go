@@ -81,6 +81,29 @@ printf("%v", v)
 	},
 }
 
+var _ = AddExps(cCallFunc)
+var cCallFunc = &FuncExample{
+	FnName: FnCallFuncDesc.Name,
+	Progs: []ProgCase{
+		{
+			Script: `result = call_func("echo", {
+    "arg_1": "1",
+	"arg_2": [12,3],
+	"key3": "true"
+})
+printf("%v", result)`,
+			Stdout:  `{"error":"","message":"","ok":true,"reason":"","result":{"arg_1":"1","arg_2":[12,3],"kwargs":{"key3":"true"}}}`,
+			jsonout: true,
+		},
+		{
+			Script: `result = call_func("echo", {"arg_2": [12,3]})
+printf("%v", result)`,
+			Stdout:  `{"detail":{"exeception":"TypeError(\"echo() missing 1 required positional argument: 'arg_1'\")"},"error":"call function failed, api status code 599","message":"Func task failed","ok":false,"reason":"EFuncFailed"}`,
+			jsonout: true,
+		},
+	},
+}
+
 var _ = AddExps(cCast)
 var cCast = &FuncExample{
 	FnName: FnCastDesc.Name,

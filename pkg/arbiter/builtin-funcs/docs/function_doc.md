@@ -134,6 +134,62 @@ Function examples:
 
     
 
+## `call_func` {#fn-call_func}
+
+Function prototype: `fn call_func(name: str, kwargs: map = {}) -> map`
+
+Function description: Calling remote functions on the Function platform
+
+Function parameters:
+
+- `name`: Remote function name.
+- `kwargs`: Parameter map, corresponding to **kwargs in Python.
+
+
+Function returns:
+
+- `map`: 
+
+
+Function examples:
+
+* Case 0:
+
+    Script content:
+
+    ```txt
+    result = call_func("echo", {
+        "arg_1": "1",
+    	"arg_2": [12,3],
+    	"key3": "true"
+    })
+    printf("%v", result)
+    ```
+
+    Standard output:
+
+    ```txt
+    {"error":"","message":"","ok":true,"reason":"","result":{"arg_1":"1","arg_2":[12,3],"kwargs":{"key3":"true"}}}
+    ```
+
+    
+* Case 1:
+
+    Script content:
+
+    ```txt
+    result = call_func("echo", {"arg_2": [12,3]})
+    printf("%v", result)
+    ```
+
+    Standard output:
+
+    ```txt
+    {"detail":{"exeception":"TypeError(\"echo() missing 1 required positional argument: 'arg_1'\")"},"error":"call function failed, api status code 599","message":"Func task failed","ok":false,"reason":"EFuncFailed"}
+    ```
+
+    
+
 ## `cast` {#fn-cast}
 
 Function prototype: `fn cast(val: bool|int|float|str, typ: str) -> bool|int|float|str`
