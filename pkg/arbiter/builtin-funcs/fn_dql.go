@@ -81,7 +81,7 @@ func FnDQL(ctx *runtimev2.Task, expr *ast.CallExpr) *errchain.PlError {
 	}
 	dqlCli, ok := v.(dql.DQL)
 	if !ok || dqlCli == nil {
-		return runtimev2.NewRunError(ctx, fmt.Sprintf("context data %s type is expected", PDQLCli), expr.NamePos)
+		return runtimev2.NewRunError(ctx, fmt.Sprintf("context data %s type is unexpected", PDQLCli), expr.NamePos)
 	}
 
 	query, err := runtimev2.GetParamString(ctx, expr, FnDQLDesc.Params, 0)

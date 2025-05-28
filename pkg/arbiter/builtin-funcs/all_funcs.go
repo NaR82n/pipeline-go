@@ -18,6 +18,11 @@ var Funcs = map[string]*runtimev2.Fn{
 		Call:      FnAppend,
 		Desc:      FnAppendDesc,
 	},
+	FnCallFuncDesc.Name: {
+		CallCheck: FnCallFuncCheck,
+		Call:      FnCallFunc,
+		Desc:      FnCallFuncDesc,
+	},
 	FnCastDesc.Name: {
 		CallCheck: FnCastCheck,
 		Call:      FnCast,
