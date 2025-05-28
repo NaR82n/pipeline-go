@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/GuanceCloud/pipeline-go/pkg/arbiter"
 	funcs "github.com/GuanceCloud/pipeline-go/pkg/arbiter/builtin-funcs"
@@ -18,6 +19,7 @@ var (
 	openapiEndpoint string
 	openapiKey      string
 	programStr      string
+	duration        string
 
 	listFn      bool
 	outFnFormat string
@@ -51,11 +53,15 @@ func init() {
 		&openapiKey, "guance-key", "k", "", "GuanceCloud openapi key")
 	runCommand.Flags().StringVarP(
 		&programStr, "cmd", "c", "", "program passed in as string")
+	runCommand.Flags().StringVarP(
+		&duration, "duration", "d", "15m", "query time range, such as 1h, 15m, 60s",
+	)
 
 	funcCommand.Flags().BoolVarP(
 		&listFn, "list", "l", false, "list functions")
 	funcCommand.Flags().StringVarP(
 		&outFnFormat, "output", "o", "", "output format, one of: (wide, json)")
+
 }
 
 func main() {
@@ -83,9 +89,15 @@ func run(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("no program passed")
 	}
 
+	ts := time.Now().Unix()
+	d, _ := time.ParseDuration(duration)
+
+	timeRange := []int64{int64(ts-d.Milliseconds()/1e3) * 1e3,
+		ts * 1e3}
+
 	stdout := bytes.NewBuffer([]byte{})
 	if err := arbiter.Run(name, script,
-		arbiter.WithDQLOpenAPI(openapiEndpoint, openapiKey, nil),
+		arbiter.WithDQLOpenAPI(openapiEndpoint, openapiKey, timeRange),
 		arbiter.WithFuncs(funcs.Funcs),
 		arbiter.WithStdout(stdout),
 		arbiter.WithTrigger(tr),
@@ -97,7 +109,7 @@ func run(cmd *cobra.Command, args []string) error {
 		enc := json.NewEncoder(b)
 		enc.SetIndent("", "  ")
 		_ = enc.Encode(tr.Result())
-		fmt.Fprintf(os.Stdout, "\n===\n%s\n=== program run result:\ntrigger output:\n%s\n",
+		fmt.Fprintf(os.Stdout, "=== stdout:\n%s\n=== program run result:\ntrigger output:\n%s\n",
 			stdout.String(), b.String())
 	}
 
