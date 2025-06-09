@@ -49,7 +49,6 @@ type DQLCliKodo struct {
 	Timerange []int64
 
 	MetricTotal *ProgressMetric
-	Metrics     map[token.LnColPos]*ProgressMetric
 }
 
 func NewDQLKodo(url, uuid string, timeRange []int64) *DQLCliKodo {
@@ -58,7 +57,6 @@ func NewDQLKodo(url, uuid string, timeRange []int64) *DQLCliKodo {
 		WSUUID:      uuid,
 		Timerange:   timeRange,
 		MetricTotal: &ProgressMetric{},
-		Metrics:     map[token.LnColPos]*ProgressMetric{},
 	}
 }
 
@@ -74,13 +72,7 @@ func (cli *DQLCliKodo) Query(pos token.LnColPos, q, qTyp string, limit, offset, 
 	if url == "" {
 		return nil, fmt.Errorf("dql query url is empty")
 	}
-	var curMetric *ProgressMetric
-	if v, ok := cli.Metrics[pos]; !ok {
-		curMetric = &ProgressMetric{}
-		cli.Metrics[pos] = curMetric
-	} else {
-		curMetric = v
-	}
+	var curMetric ProgressMetric
 
 	query := map[string]any{
 		"query":                         q,
@@ -143,10 +135,10 @@ func (cli *DQLCliKodo) Query(pos token.LnColPos, q, qTyp string, limit, offset, 
 			result["message"] = qResp.Message
 		}
 
-		result["series"] = cli.GetSeries(qResp, curMetric)
+		result["series"] = cli.GetSeries(qResp, &curMetric)
 
 		cli.MetricTotal.ScannedCompressedBytes += curMetric.ScannedCompressedBytes
-		cli.MetricTotal.ScannedRows = curMetric.ScannedRows
+		cli.MetricTotal.ScannedRows += curMetric.ScannedRows
 		cli.MetricTotal.Count++
 	} else {
 		result["error_code"] = errcode.ArbiterFnErr
