@@ -35,6 +35,9 @@ jobs:
           go build -o dist/arbiter-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.os == 'windows' && '.exe' || '' }} \
             -ldflags="-s -w" \
             ./cmd/arbiter
+          if [ "${{ matrix.os }}" != "windows" ]; then
+            chmod +x dist/myapp-${{ matrix.os }}-${{ matrix.arch }}
+          fi
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
